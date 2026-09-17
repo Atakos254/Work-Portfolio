@@ -72,10 +72,7 @@ const Home: React.FC = () => {
               id="hero-heading"
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.14] tracking-tight mb-6 text-neutral-950 text-balance max-w-4xl mx-auto"
             >
-              Engineering{' '}
-              <span className="text-neutral-950 underline decoration-neutral-300 decoration-2 underline-offset-8">Scalable Solar PV</span>,{' '}
-              Utility Microgrids &amp;{' '}
-              <span className="text-neutral-950">Real-Time IoT Telemetry</span>
+              Engineering Scalable Solar PV, Utility Microgrids &amp; Real-Time IoT Telemetry
             </h1>
 
             <p className="text-neutral-600 text-lg sm:text-xl leading-relaxed mb-9 max-w-3xl mx-auto">
