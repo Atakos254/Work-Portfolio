@@ -50,16 +50,16 @@ const Home: React.FC = () => {
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative min-h-[calc(80vh-64px)] flex items-center overflow-hidden bg-white"
+        className="relative min-h-[calc(78vh-64px)] flex items-center justify-center overflow-hidden bg-white"
         aria-labelledby="hero-heading"
       >
-        <div className="section-wrapper py-20 lg:py-28 relative z-10 w-full max-w-4xl">
+        <div className="section-wrapper py-20 lg:py-28 relative z-10 w-full max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 mb-6 px-3.5 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80">
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 mx-auto">
               <span className="text-xs text-neutral-700 font-medium italic">
                 “Scientists discover the world that exists; engineers create the world that never was.”
               </span>
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
 
             <h1
               id="hero-heading"
-              className="text-4xl sm:text-5xl xl:text-6xl font-black leading-[1.12] tracking-tight mb-6 text-neutral-950 text-balance"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.14] tracking-tight mb-6 text-neutral-950 text-balance max-w-4xl mx-auto"
             >
               Engineering{' '}
               <span className="text-neutral-950 underline decoration-neutral-300 decoration-2 underline-offset-8">Scalable Solar PV</span>,{' '}
@@ -78,13 +78,13 @@ const Home: React.FC = () => {
               <span className="text-neutral-950">Real-Time IoT Telemetry</span>
             </h1>
 
-            <p className="text-neutral-600 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl">
+            <p className="text-neutral-600 text-lg sm:text-xl leading-relaxed mb-9 max-w-3xl mx-auto">
               Hands-on field engineer with <strong className="text-neutral-950 font-semibold">1.65+ MWp</strong> solar installed,{' '}
               <strong className="text-neutral-950 font-semibold">1,500 VDC</strong> utility systems, multi-parallel hybrid inverters,
               and <strong className="text-neutral-950 font-semibold">EBK Graduate Registration (B25236)</strong>.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-10">
+            <div className="flex flex-wrap justify-center gap-3 mb-9">
               <Link to="/projects" id="hero-cta-projects" className="btn-primary">
                 Explore Projects (1.65+ MWp)
                 <ArrowRight size={16} />
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Credential pills */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {[
                 { label: 'EBK Reg: B25236', color: 'badge-neutral' },
                 { label: 'IEK Graduate Member', color: 'badge-neutral' },
