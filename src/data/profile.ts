@@ -38,7 +38,7 @@ export const profileData: ProfileData = {
     phone: '+254 795 628 615',
     location: 'Nairobi, Kenya',
     linkedin: 'https://linkedin.com/in/emmanuel-atakos',
-    github: 'https://github.com/emmanuelatakos',
+    github: 'https://github.com/Atakos254',
   },
   registrations: {
     ebkRegistration: 'Graduate Engineer (B25236) — Engineers Board of Kenya',
