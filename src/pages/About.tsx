@@ -196,6 +196,18 @@ const About: React.FC = () => {
                 LinkedIn Profile
               </a>
             )}
+            {profileData.contact.github && (
+              <a
+                href={profileData.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View GitHub profile"
+                className="btn-secondary"
+              >
+                <ExternalLink size={15} />
+                GitHub Profile
+              </a>
+            )}
           </div>
           <p className="text-xs text-neutral-500 mt-4 font-medium">
             Drop the PDF files into <code className="text-neutral-800 bg-neutral-200 px-1.5 py-0.5 rounded font-mono">/public/docs/</code> folder in the project directory.
