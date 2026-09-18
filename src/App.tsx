@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { Layout } from './components/layout/Layout';
+import { ScrollToTop } from './components/common/ScrollToTop';
 import { Loader2 } from 'lucide-react';
 
 // Lazy-load pages for code splitting
@@ -22,6 +23,7 @@ function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route element={<Layout />}>

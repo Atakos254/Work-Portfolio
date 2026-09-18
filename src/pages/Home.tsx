@@ -50,62 +50,96 @@ const Home: React.FC = () => {
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative min-h-[calc(78vh-64px)] flex items-center justify-center overflow-hidden bg-white"
+        className="relative overflow-hidden bg-white"
         aria-labelledby="hero-heading"
       >
-        <div className="section-wrapper py-20 lg:py-28 relative z-10 w-full max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 mx-auto">
-              <span className="text-xs text-neutral-700 font-medium italic">
-                “Scientists discover the world that exists; engineers create the world that never was.”
-              </span>
-              <span className="text-[11px] text-neutral-500 font-normal">
-                — Theodore von Kármán
-              </span>
-            </div>
+        <div className="section-wrapper pt-4 sm:pt-6 lg:pt-10 pb-12 sm:pb-16 lg:pb-24 relative z-10 w-full">
+          <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-10 items-center">
 
-            <h1
-              id="hero-heading"
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.14] tracking-tight mb-6 text-neutral-950 text-balance max-w-4xl mx-auto"
+            {/* Left Content Column */}
+            <motion.div
+              className="lg:col-span-7 text-center lg:text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
             >
-              Engineering Scalable Solar PV, Utility Microgrids &amp; Real-Time IoT Telemetry
-            </h1>
+              <div className="inline-flex flex-wrap sm:flex-nowrap justify-center items-center text-center gap-1 sm:gap-2 mb-4 sm:mb-5 px-3.5 py-1.5 rounded-2xl sm:rounded-full bg-neutral-100 border border-neutral-200/80 mx-auto lg:mx-0 max-w-full">
+                <span className="text-xs text-neutral-700 font-medium italic">
+                  “Scientists discover the world that exists; engineers create the world that never was.”
+                </span>
+                <span className="text-[11px] text-neutral-500 font-normal hidden sm:inline">
+                  — Theodore von Kármán
+                </span>
+              </div>
 
-            <p className="text-neutral-600 text-lg sm:text-xl leading-relaxed mb-9 max-w-3xl mx-auto">
-              Hands-on field engineer with <strong className="text-neutral-950 font-semibold">1.65+ MWp</strong> solar installed,{' '}
-              <strong className="text-neutral-950 font-semibold">1,500 VDC</strong> utility systems, multi-parallel hybrid inverters,
-              and <strong className="text-neutral-950 font-semibold">EBK Graduate Registration (B25236)</strong>.
-            </p>
+              <h1
+                id="hero-heading"
+                className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.2] sm:leading-[1.14] tracking-tight mb-4 sm:mb-6 text-neutral-950 text-balance"
+              >
+                Engineering Scalable Electrical, Solar PV, Utility Microgrids &amp; Real-Time IoT Projects
+              </h1>
 
-            <div className="flex flex-wrap justify-center gap-3 mb-9">
-              <Link to="/projects" id="hero-cta-projects" className="btn-primary">
-                Explore Projects (1.65+ MWp)
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/about" id="hero-cta-credentials" className="btn-secondary">
-                <Award size={16} />
-                View EBK Credentials
-              </Link>
-              <Link to="/contact" id="hero-cta-contact" className="btn-secondary">
-                Contact Me
-              </Link>
-            </div>
+              <p className="text-neutral-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
+                Hands-on field engineer with <strong className="text-neutral-950 font-semibold">1.65+ MWp</strong> solar installed,{' '}
+                <strong className="text-neutral-950 font-semibold">1,500 VDC</strong> utility systems, multi-parallel hybrid inverters,
+                and <strong className="text-neutral-950 font-semibold">EBK Graduate Engineer (B25236)</strong>.
+              </p>
 
-            {/* Credential pills */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {[
-                { label: 'EBK Reg: B25236', color: 'badge-neutral' },
-                { label: 'IEK Graduate Member', color: 'badge-neutral' },
-                { label: 'JKUAT B.Sc. Eng.', color: 'badge-neutral' },
-              ].map(c => (
-                <span key={c.label} className={c.color}>{c.label}</span>
-              ))}
-            </div>
-          </motion.div>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3 mb-6 sm:mb-8">
+                <Link to="/projects" id="hero-cta-projects" className="btn-primary">
+                  Explore Projects (1.65+ MWp)
+                  <ArrowRight size={16} />
+                </Link>
+                <Link to="/about" id="hero-cta-credentials" className="btn-secondary">
+                  <Award size={16} />
+                  View Credentials
+                </Link>
+                <Link to="/contact" id="hero-cta-contact" className="btn-secondary">
+                  Contact Me
+                </Link>
+              </div>
+
+              {/* Credential pills */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+                {[
+                  { label: 'EBK Reg: B25236', color: 'badge-neutral' },
+                  { label: 'IEK Graduate Member', color: 'badge-neutral' },
+                  { label: 'JKUAT B.Sc. Eng.', color: 'badge-neutral' },
+                ].map(c => (
+                  <span key={c.label} className={c.color}>{c.label}</span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right Photo Column */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0 mb-4 lg:mb-0"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <div className="relative w-full max-w-[280px] sm:max-w-[330px] lg:max-w-[370px]">
+                {/* Outer frame */}
+                <div className="relative p-2.5 sm:p-3 rounded-3xl bg-neutral-50/90 border border-neutral-200/90 shadow-sm hover:shadow-card-hover transition-all duration-300">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-white">
+                    <img
+                      src="/images/emmanuel-atakos.jpg?v=3"
+                      alt="Emmanuel Thomas Atakos — Electrical, Solar PV & BESS Engineer"
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                      loading="eager"
+                    />
+                  </div>
+
+                  {/* Bottom floating credentials card */}
+                  <div className="absolute -bottom-4 left-2 right-2 sm:left-4 sm:right-4 bg-white/95 backdrop-blur-md border border-neutral-200/90 rounded-2xl py-2 px-3 sm:py-2.5 sm:px-4 shadow-card text-center">
+                    <div className="text-xs font-bold text-neutral-950 truncate">Emmanuel Thomas Atakos</div>
+                    <div className="text-[10px] sm:text-[11px] text-neutral-500 font-medium truncate mt-0.5">EBK Graduate Engineer (B25236)</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -209,7 +243,7 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl sm:text-3xl font-black text-neutral-950 mb-3 tracking-tight">
-              Have a solar or IoT project in mind?
+              Have an Electrical, IoT or Solar PV project in mind?
             </h2>
             <p className="text-neutral-600 mb-8 max-w-lg mx-auto text-base">
               From feasibility study to field commissioning — let's engineer it right.

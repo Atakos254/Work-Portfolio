@@ -683,7 +683,7 @@ Task:
    - Contrast check: ensure amber text and muted gray meet minimum 4.5:1 contrast against dark backgrounds.
    - Add semantic `<main>`, `<nav>`, `<header>`, `<footer>`, `<section>` landmarks.
 2. Configure SEO & Meta Tags in `index.html`:
-   - Title: "Emmanuel Atakos | Solar PV, BESS & Energy IoT Engineer"
+   - Title: "Emmanuel Atakos | Solar PV, BESS & Electrical Engineer"
    - Meta description highlighting EBK registration, 1.4 MWp solar, and 336 kWh BESS experience.
    - Open Graph (OG) tags for LinkedIn and social previews.
 3. Configure `vercel.json` with single-page app rewrite rule:
