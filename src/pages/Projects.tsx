@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, Zap, Sun } from 'lucide-react';
-import { projectsData } from '../data/projects';
+import { projectsData, ProjectItem } from '../data/projects';
 import { ProjectCard } from '../components/projects/ProjectCard';
+import { ProjectMediaModal } from '../components/projects/ProjectMediaModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ALL = 'All Projects';
@@ -11,6 +12,7 @@ type Filter = typeof categories[number];
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Filter>(ALL);
   const [search, setSearch] = useState('');
+  const [activeMediaProject, setActiveMediaProject] = useState<ProjectItem | null>(null);
 
   const filtered = useMemo(() => {
     return projectsData.filter(p => {
@@ -127,7 +129,12 @@ const Projects: React.FC = () => {
               className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {filtered.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={i}
+                  onOpenMedia={setActiveMediaProject}
+                />
               ))}
             </motion.div>
           ) : (
@@ -148,6 +155,12 @@ const Projects: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Interactive Media Lightbox Modal */}
+        <ProjectMediaModal
+          project={activeMediaProject}
+          onClose={() => setActiveMediaProject(null)}
+        />
       </div>
     </div>
   );

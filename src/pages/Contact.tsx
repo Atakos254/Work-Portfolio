@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Mail, Phone, MapPin, MessageSquare, Send, CheckCircle,
-  Loader2, Clock, ExternalLink, Zap, ChevronDown,
+  Loader2, Clock, ExternalLink, Zap, ChevronDown, AlertCircle,
 } from 'lucide-react';
 import { profileData } from '../data/profile';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -53,7 +53,8 @@ function validate(form: FormState): FormErrors {
 const Contact: React.FC = () => {
   const [form, setForm] = useState<FormState>({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -63,9 +64,12 @@ const Contact: React.FC = () => {
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
+    if (serverError) {
+      setServerError(null);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
     if (Object.keys(errs).length > 0) {
@@ -73,12 +77,42 @@ const Contact: React.FC = () => {
       return;
     }
     setStatus('loading');
-    // Simulate async submit
-    setTimeout(() => setStatus('success'), 1800);
+    setServerError(null);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${profileData.contact.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          inquiryType: form.subject,
+          message: form.message,
+          _subject: `New Portfolio Inquiry: [${form.subject}] from ${form.name}`,
+          _replyto: form.email,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message || 'Failed to submit form. Please try again.');
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Unable to send message right now.';
+      setServerError(msg);
+      setStatus('error');
+    }
   };
 
   const inputClass = (field: keyof FormErrors) =>
-    `w-full px-4 py-3 rounded-xl bg-white border text-sm text-neutral-900 placeholder:text-neutral-400
+    `w-full px-4 py-2.5 rounded-xl bg-white border text-sm text-neutral-900 placeholder:text-neutral-400
      focus:outline-none focus:ring-2 transition-all duration-200 shadow-subtle ${
        errors[field]
          ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20'
@@ -173,8 +207,10 @@ const Contact: React.FC = () => {
                 rel="noopener noreferrer"
                 aria-label="Chat with Emmanuel on WhatsApp"
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
-                           border border-neutral-300 text-neutral-900 bg-white hover:bg-neutral-50
-                           transition-all duration-200 hover:-translate-y-0.5"
+                           border border-neutral-300 text-neutral-900 bg-white
+                           hover:bg-neutral-950 hover:text-white hover:border-neutral-950
+                           active:bg-neutral-950 active:text-white active:border-neutral-950
+                           transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
               >
                 <MessageSquare size={16} />
                 Chat on WhatsApp
@@ -237,8 +273,8 @@ const Contact: React.FC = () => {
 
           {/* ── Right Column — Form ───────────────────────────────── */}
           <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-8 shadow-sm">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">Send an Inquiry</h2>
+            <div className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-neutral-950 mb-4 tracking-tight">Send an Inquiry</h2>
 
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
@@ -246,17 +282,17 @@ const Contact: React.FC = () => {
                     key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center justify-center py-16 text-center gap-4"
+                    className="flex flex-col items-center justify-center min-h-[440px] text-center gap-4 py-8"
                   >
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200/80 dark:border-emerald-500/30 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200/80 flex items-center justify-center">
                       <CheckCircle size={32} className="text-emerald-600" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">Message Received!</h3>
-                    <p className="text-slate-600 dark:text-slate-400 max-w-xs">
+                    <h3 className="text-xl font-bold text-neutral-950">Message Sent</h3>
+                    <p className="text-neutral-600 max-w-xs">
                       Emmanuel will reply within 24 hours. You can also reach him directly on WhatsApp for faster response.
                     </p>
                     <button
-                      onClick={() => { setStatus('idle'); setForm({ name: '', email: '', subject: '', message: '' }); }}
+                      onClick={() => { setStatus('idle'); setServerError(null); setForm({ name: '', email: '', subject: '', message: '' }); }}
                       className="btn-secondary mt-2"
                     >
                       Send Another Message
@@ -269,12 +305,12 @@ const Contact: React.FC = () => {
                     animate={{ opacity: 1 }}
                     onSubmit={handleSubmit}
                     noValidate
-                    className="space-y-5"
+                    className="space-y-4"
                     aria-label="Contact inquiry form"
                   >
                     {/* Name */}
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-name" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -287,12 +323,12 @@ const Contact: React.FC = () => {
                         autoComplete="name"
                         className={inputClass('name')}
                       />
-                      {errors.name && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.name}</p>}
+                      {errors.name && <p className="text-red-500 text-xs mt-1 font-medium">{errors.name}</p>}
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label htmlFor="contact-email" className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-email" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -305,12 +341,12 @@ const Contact: React.FC = () => {
                         autoComplete="email"
                         className={inputClass('email')}
                       />
-                      {errors.email && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.email}</p>}
+                      {errors.email && <p className="text-red-500 text-xs mt-1 font-medium">{errors.email}</p>}
                     </div>
 
                     {/* Subject */}
                     <div>
-                      <label htmlFor="contact-subject" className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-subject" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
                         Inquiry Type <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -326,32 +362,53 @@ const Contact: React.FC = () => {
                             <option key={t} value={t}>{t}</option>
                           ))}
                         </select>
-                        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
                       </div>
-                      {errors.subject && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.subject}</p>}
+                      {errors.subject && <p className="text-red-500 text-xs mt-1 font-medium">{errors.subject}</p>}
                     </div>
 
                     {/* Message */}
                     <div>
-                      <label htmlFor="contact-message" className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-message" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
                         Project Details / Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         id="contact-message"
                         name="message"
-                        rows={6}
+                        rows={4}
                         value={form.message}
                         onChange={handleChange}
                         placeholder="Describe your project, location, load requirements, or how I can help…"
-                        className={inputClass('message') + ' resize-none'}
+                        className={inputClass('message') + ' resize-none min-h-[101px]'}
                       />
-                      <div className="flex justify-between mt-1.5">
+                      <div className="flex justify-between mt-1">
                         {errors.message
                           ? <p className="text-red-500 text-xs font-medium">{errors.message}</p>
                           : <span />}
-                        <span className="text-xs text-slate-400">{form.message.length} chars</span>
+                        <span className="text-xs text-neutral-400">{form.message.length} chars</span>
                       </div>
                     </div>
+
+                    {/* Error Banner */}
+                    {serverError && (
+                      <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2.5">
+                        <AlertCircle size={15} className="text-red-500 shrink-0 mt-0.5" />
+                        <div className="space-y-1">
+                          <p className="font-medium">{serverError}</p>
+                          <p>
+                            You can also email directly to{' '}
+                            <a
+                              href={`mailto:${profileData.contact.email}?subject=${encodeURIComponent(
+                                `[${form.subject || 'Inquiry'}] from ${form.name || 'Visitor'}`
+                              )}&body=${encodeURIComponent(form.message)}`}
+                              className="font-semibold underline hover:text-red-900"
+                            >
+                              {profileData.contact.email}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Submit */}
                     <button

@@ -34,7 +34,7 @@ export const profileData: ProfileData = {
   summary:
     'Registered Graduate Engineer with proven hands-on expertise in hybrid solar PV system sizing, 1,500 VDC utility arrays, lithium-iron-phosphate (LiFePO4) storage, EV charging infrastructure, and Industry 4.0 IoT energy monitoring. Proven track record across commercial, residential, and megawatt grid-tied installations.',
   contact: {
-    email: 'emmanuelatakos@gmail.com',
+    email: 'Emmanuelatakos@gmail.com',
     phone: '+254 795 628 615',
     location: 'Nairobi, Kenya',
     linkedin: 'https://linkedin.com/in/emmanuel-atakos',
@@ -53,8 +53,8 @@ export const profileData: ProfileData = {
     ],
   },
   metrics: {
-    totalSolarCapacityMWp: '1.65+ MWp',
-    totalBatteryStorageKWh: '500+ kWh',
+    totalSolarCapacityMWp: '1.6+ MWp',
+    totalBatteryStorageKWh: '700+ kWh',
     commercialSitesCompleted: 7,
     iotGatewaysDeployed: '50+',
   },
