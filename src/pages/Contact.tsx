@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Mail, Phone, MapPin, MessageSquare, Send, CheckCircle,
-  Loader2, Clock, ExternalLink, Zap, ChevronDown, AlertCircle,
+  Loader2, Clock, Zap, ChevronDown, AlertCircle,
 } from 'lucide-react';
 import { profileData } from '../data/profile';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -112,11 +112,11 @@ const Contact: React.FC = () => {
   };
 
   const inputClass = (field: keyof FormErrors) =>
-    `w-full px-4 py-2.5 rounded-xl bg-white border text-sm text-neutral-900 placeholder:text-neutral-400
+    `w-full px-3.5 sm:px-4 py-2.5 rounded-xl bg-white dark:bg-[#0e1422] border text-base sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500
      focus:outline-none focus:ring-2 transition-all duration-200 shadow-subtle ${
        errors[field]
-         ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20'
-         : 'border-neutral-200 focus:border-neutral-900 focus:ring-neutral-900/10'
+         ? 'border-red-400 dark:border-red-500/80 focus:border-red-500 focus:ring-red-500/20'
+         : 'border-neutral-200 dark:border-neutral-700 focus:border-neutral-900 dark:focus:border-neutral-300 focus:ring-neutral-900/10 dark:focus:ring-white/10'
      }`;
 
   const whatsappMsg = encodeURIComponent(
@@ -124,24 +124,23 @@ const Contact: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white">
+    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Header */}
-        <div className="mb-12 sm:mb-14">
-          <div className="text-xs font-bold tracking-widest text-neutral-500 uppercase mb-2">Get In Touch</div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 mb-3 tracking-tight">Contact Emmanuel</h1>
-          <p className="text-neutral-600 max-w-xl text-base leading-relaxed">
-            Available for solar PV design consultations, BESS engineering, IoT integration projects,
-            and full-time engineering roles across Kenya and East Africa.
+        <div className="mb-10 sm:mb-14">
+          <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Get In Touch</div>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Let’s Build Something Resilient</h1>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-xl text-sm sm:text-base leading-relaxed">
+            Open to select consulting engagements, system deployments and forward-looking engineering roles across East Africa &amp; the World.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
           {/* ── Left Column ──────────────────────────────────────── */}
           <div className="lg:col-span-2 space-y-6">
             {/* Direct Contact */}
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 mb-5">
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-5">
                 Direct Contact
               </h2>
               <ul className="space-y-4">
@@ -151,12 +150,12 @@ const Contact: React.FC = () => {
                     aria-label="Send email to Emmanuel"
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center shrink-0">
-                      <Mail size={15} className="text-neutral-700" />
+                    <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center shrink-0">
+                      <Mail size={15} className="text-neutral-700 dark:text-neutral-300" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-0.5 font-semibold">Email</div>
-                      <div className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-950 transition-colors">
+                      <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-0.5 font-semibold">Email</div>
+                      <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors">
                         {profileData.contact.email}
                       </div>
                     </div>
@@ -168,24 +167,24 @@ const Contact: React.FC = () => {
                     aria-label="Call Emmanuel"
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center shrink-0">
-                      <Phone size={15} className="text-neutral-700" />
+                    <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center shrink-0">
+                      <Phone size={15} className="text-neutral-700 dark:text-neutral-300" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-0.5 font-semibold">Phone / WhatsApp</div>
-                      <div className="text-sm font-semibold text-neutral-900 group-hover:text-neutral-950 transition-colors">
+                      <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-0.5 font-semibold">Phone / WhatsApp</div>
+                      <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors">
                         {profileData.contact.phone}
                       </div>
                     </div>
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center shrink-0">
-                    <MapPin size={15} className="text-neutral-700" />
+                  <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center shrink-0">
+                    <MapPin size={15} className="text-neutral-700 dark:text-neutral-300" />
                   </div>
                   <div>
-                    <div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-0.5 font-semibold">Location</div>
-                    <div className="text-sm font-semibold text-neutral-900">{profileData.contact.location}</div>
+                    <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-0.5 font-semibold">Location</div>
+                    <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{profileData.contact.location}</div>
                   </div>
                 </li>
               </ul>
@@ -206,11 +205,7 @@ const Contact: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with Emmanuel on WhatsApp"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
-                           border border-neutral-300 text-neutral-900 bg-white
-                           hover:bg-neutral-950 hover:text-white hover:border-neutral-950
-                           active:bg-neutral-950 active:text-white active:border-neutral-950
-                           transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                className="btn-secondary w-full justify-center"
               >
                 <MessageSquare size={16} />
                 Chat on WhatsApp
@@ -218,17 +213,17 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Availability */}
-            <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-sm font-bold text-neutral-900">Working Hours & Availability</span>
+                <span className="text-sm font-bold text-neutral-900 dark:text-white">Working Hours & Availability</span>
               </div>
-              <div className="space-y-2 text-xs text-neutral-600 font-medium">
+              <div className="space-y-2 text-xs text-neutral-600 dark:text-neutral-300 font-medium">
                 <div className="flex items-center gap-2">
-                  <Clock size={13} className="text-neutral-500" />
+                  <Clock size={13} className="text-neutral-500 dark:text-neutral-400" />
                   Mon – Fri · 08:00 – 18:00 EAT
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap size={13} className="text-neutral-500" />
+                  <Zap size={13} className="text-neutral-500 dark:text-neutral-400" />
                   Response within 24 hours
                 </div>
               </div>
@@ -239,15 +234,12 @@ const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Emmanuel's LinkedIn profile"
-                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-neutral-300 bg-white text-xs font-semibold text-neutral-800
-                               hover:bg-neutral-950 hover:text-white hover:border-neutral-950
-                               shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                    className="btn-secondary text-xs py-2 px-3.5 group"
                   >
-                    <svg className="w-3.5 h-3.5 fill-neutral-900 group-hover:fill-white transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="w-3.5 h-3.5 fill-neutral-900 dark:fill-neutral-200 group-hover:fill-white dark:group-hover:fill-[#090d16] group-active:fill-white dark:group-active:fill-[#090d16] transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
                     </svg>
                     <span>LinkedIn</span>
-                    <ExternalLink size={11} className="text-neutral-400 group-hover:text-white/80 transition-colors shrink-0" />
                   </a>
                 )}
                 {profileData.contact.github && (
@@ -256,15 +248,12 @@ const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Emmanuel's GitHub profile"
-                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-neutral-300 bg-white text-xs font-semibold text-neutral-800
-                               hover:bg-neutral-950 hover:text-white hover:border-neutral-950
-                               shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+                    className="btn-secondary text-xs py-2 px-3.5 group"
                   >
-                    <svg className="w-3.5 h-3.5 fill-neutral-900 group-hover:fill-white transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="w-3.5 h-3.5 fill-neutral-900 dark:fill-neutral-200 group-hover:fill-white dark:group-hover:fill-[#090d16] group-active:fill-white dark:group-active:fill-[#090d16] transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                       <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
                     <span>GitHub</span>
-                    <ExternalLink size={11} className="text-neutral-400 group-hover:text-white/80 transition-colors shrink-0" />
                   </a>
                 )}
               </div>
@@ -273,8 +262,8 @@ const Contact: React.FC = () => {
 
           {/* ── Right Column — Form ───────────────────────────────── */}
           <div className="lg:col-span-3">
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-neutral-950 mb-4 tracking-tight">Send an Inquiry</h2>
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm">
+              <h2 className="text-xl font-bold text-neutral-950 dark:text-white mb-4 tracking-tight">Send an Inquiry</h2>
 
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
@@ -284,11 +273,11 @@ const Contact: React.FC = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center min-h-[440px] text-center gap-4 py-8"
                   >
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200/80 flex items-center justify-center">
-                      <CheckCircle size={32} className="text-emerald-600" />
+                    <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 flex items-center justify-center">
+                      <CheckCircle size={32} className="text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <h3 className="text-xl font-bold text-neutral-950">Message Sent</h3>
-                    <p className="text-neutral-600 max-w-xs">
+                    <h3 className="text-xl font-bold text-neutral-950 dark:text-white">Message Sent</h3>
+                    <p className="text-neutral-600 dark:text-neutral-300 max-w-xs">
                       Emmanuel will reply within 24 hours. You can also reach him directly on WhatsApp for faster response.
                     </p>
                     <button
@@ -310,7 +299,7 @@ const Contact: React.FC = () => {
                   >
                     {/* Name */}
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
+                      <label htmlFor="contact-name" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -328,7 +317,7 @@ const Contact: React.FC = () => {
 
                     {/* Email */}
                     <div>
-                      <label htmlFor="contact-email" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
+                      <label htmlFor="contact-email" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -346,7 +335,7 @@ const Contact: React.FC = () => {
 
                     {/* Subject */}
                     <div>
-                      <label htmlFor="contact-subject" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
+                      <label htmlFor="contact-subject" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
                         Inquiry Type <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -357,19 +346,19 @@ const Contact: React.FC = () => {
                           onChange={handleChange}
                           className={inputClass('subject') + ' appearance-none cursor-pointer pr-10'}
                         >
-                          <option value="" disabled>Select inquiry type…</option>
+                          <option value="" disabled className="bg-white dark:bg-[#0e1422] text-neutral-900 dark:text-white">Select inquiry type…</option>
                           {inquiryTypes.map(t => (
-                            <option key={t} value={t}>{t}</option>
+                            <option key={t} value={t} className="bg-white dark:bg-[#0e1422] text-neutral-900 dark:text-white">{t}</option>
                           ))}
                         </select>
-                        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+                        <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 pointer-events-none" />
                       </div>
                       {errors.subject && <p className="text-red-500 text-xs mt-1 font-medium">{errors.subject}</p>}
                     </div>
 
                     {/* Message */}
                     <div>
-                      <label htmlFor="contact-message" className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase tracking-wider">
+                      <label htmlFor="contact-message" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
                         Project Details / Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
@@ -385,13 +374,13 @@ const Contact: React.FC = () => {
                         {errors.message
                           ? <p className="text-red-500 text-xs font-medium">{errors.message}</p>
                           : <span />}
-                        <span className="text-xs text-neutral-400">{form.message.length} chars</span>
+                        <span className="text-xs text-neutral-400 dark:text-neutral-500">{form.message.length} chars</span>
                       </div>
                     </div>
 
                     {/* Error Banner */}
                     {serverError && (
-                      <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2.5">
+                      <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-xs text-red-700 dark:text-red-300 flex items-start gap-2.5">
                         <AlertCircle size={15} className="text-red-500 shrink-0 mt-0.5" />
                         <div className="space-y-1">
                           <p className="font-medium">{serverError}</p>
@@ -401,7 +390,7 @@ const Contact: React.FC = () => {
                               href={`mailto:${profileData.contact.email}?subject=${encodeURIComponent(
                                 `[${form.subject || 'Inquiry'}] from ${form.name || 'Visitor'}`
                               )}&body=${encodeURIComponent(form.message)}`}
-                              className="font-semibold underline hover:text-red-900"
+                              className="font-semibold underline hover:text-red-900 dark:hover:text-red-200"
                             >
                               {profileData.contact.email}
                             </a>

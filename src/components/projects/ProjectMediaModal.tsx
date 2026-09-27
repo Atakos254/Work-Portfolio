@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Play, Camera, Film, ExternalLink, Image as ImageIcon } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Play, Camera, Film, FileText, Image as ImageIcon } from 'lucide-react';
 import { ProjectItem } from '../../data/projects';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,12 +62,12 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
           onClick={e => e.stopPropagation()}
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-800 bg-neutral-900/90 text-white">
-            <div className="flex items-center gap-3 pr-4 truncate">
-              <span className="text-xs px-2.5 py-1 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300 font-semibold shrink-0">
+          <div className="flex items-center justify-between px-3.5 sm:px-5 py-3 sm:py-4 border-b border-neutral-800 bg-neutral-900/90 text-white">
+            <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-4 truncate">
+              <span className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300 font-semibold shrink-0">
                 {project.category}
               </span>
-              <h3 className="text-sm sm:text-base font-bold text-white truncate">
+              <h3 className="text-xs sm:text-base font-bold text-white truncate">
                 {project.title}
               </h3>
             </div>
@@ -75,23 +75,23 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
               <Link
                 to={`/projects/${project.id}`}
                 onClick={onClose}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-semibold text-neutral-200 transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0f172a] hover:bg-white text-[#f8fafc] hover:text-[#090d16] active:bg-white active:text-[#090d16] border border-[#334155] hover:border-white text-xs font-semibold transition-all shadow-sm cursor-pointer"
               >
+                <FileText className="w-3.5 h-3.5" />
                 <span>Full Case Study</span>
-                <ExternalLink className="w-3.5 h-3.5" />
               </Link>
               <button
                 onClick={onClose}
                 aria-label="Close modal"
-                className="p-2 rounded-xl bg-neutral-800/80 hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors"
+                className="p-1.5 sm:p-2 rounded-xl bg-[#0f172a] hover:bg-white text-[#f8fafc] hover:text-[#090d16] active:bg-white active:text-[#090d16] border border-[#334155] hover:border-white transition-all shadow-sm cursor-pointer"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
 
           {/* Main Media Viewer Stage */}
-          <div className="relative flex-1 bg-black flex items-center justify-center min-h-[260px] sm:min-h-[420px] max-h-[62vh] overflow-hidden group">
+          <div className="relative flex-1 bg-black flex items-center justify-center min-h-[220px] sm:min-h-[420px] max-h-[50vh] sm:max-h-[62vh] overflow-hidden group">
             {currentMedia.type === 'video' ? (
               <video
                 key={currentMedia.url}
@@ -138,14 +138,14 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                 <button
                   onClick={() => setActiveIndex(prev => (prev - 1 + mediaList.length) % mediaList.length)}
                   aria-label="Previous media"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-neutral-900/80 hover:bg-neutral-800 text-white border border-neutral-700 opacity-80 hover:opacity-100 transition-all shadow-lg"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#0f172a]/90 hover:bg-white active:bg-white text-[#f8fafc] hover:text-[#090d16] active:text-[#090d16] border border-[#334155] hover:border-white transition-all shadow-lg cursor-pointer"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setActiveIndex(prev => (prev + 1) % mediaList.length)}
                   aria-label="Next media"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-neutral-900/80 hover:bg-neutral-800 text-white border border-neutral-700 opacity-80 hover:opacity-100 transition-all shadow-lg"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#0f172a]/90 hover:bg-white active:bg-white text-[#f8fafc] hover:text-[#090d16] active:text-[#090d16] border border-[#334155] hover:border-white transition-all shadow-lg cursor-pointer"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
