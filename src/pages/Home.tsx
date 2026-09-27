@@ -16,7 +16,7 @@ const features = [
     color: 'text-neutral-900',
     bg: 'bg-neutral-100 border-neutral-200',
     title: 'Solar PV & Microgrid Engineering',
-    desc: 'From 12 kW residential arrays to 1.4 MWp utility-scale plants — sizing, layout, string architecture, and commissioning at 1,500 VDC.',
+    desc: 'From 12 kW residential arrays to 1.3 MWp utility-scale plants — sizing, layout, string architecture, and commissioning at 1,500 VDC.',
   },
   {
     icon: BatteryCharging,
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3 mb-6 sm:mb-8">
                 <Link to="/projects" id="hero-cta-projects" className="btn-primary">
-                  Explore Projects (1.65+ MWp)
+                  Explore Projects (1.6+ MWp)
                   <ArrowRight size={16} />
                 </Link>
                 <Link to="/about" id="hero-cta-credentials" className="btn-secondary">
@@ -198,8 +198,8 @@ const Home: React.FC = () => {
                 Recent Engineering Work
               </h2>
             </div>
-            <Link to="/projects" className="btn-secondary shrink-0" aria-label="View all 8 projects">
-              View All 8 Projects
+            <Link to="/projects" className="btn-secondary shrink-0" aria-label="View all 15 projects">
+              View All 15 Projects
               <ChevronRight size={16} />
             </Link>
           </div>

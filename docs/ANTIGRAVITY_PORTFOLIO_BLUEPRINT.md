@@ -167,7 +167,7 @@ export const projectsData: ProjectItem[] = [
     dcArchitecture: "1,500 VDC High-Voltage DC Bus; 18 strings per inverter",
     batteryStorage: "Grid-Tied (No BESS)",
     status: "Completed",
-    employerContractor: "Keda Solar",
+    employerContractor: "Hounen & Keda Solar",
     technologies: ["1500V DC Architecture", "185 kW String Inverters", "Cable Trays & Containment", "Grid Synchronization", "HV Switchgear"],
     summary:
       "Utility-scale distributed generation plant delivering 1.11 MW AC synchronized power into the medium-voltage infrastructure via six 185 kW high-voltage string inverters.",

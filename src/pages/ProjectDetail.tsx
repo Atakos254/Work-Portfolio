@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   ArrowLeft, Sun, Battery, Zap, MapPin, Calendar, Building2,
   CheckCircle2, ChevronLeft, ChevronRight, Activity, Cpu, Award,
+  AlertTriangle, Target, Lightbulb, Camera, Film, Play, Maximize2,
 } from 'lucide-react';
 import { projectsData } from '../data/projects';
+import { ProjectMediaModal } from '../components/projects/ProjectMediaModal';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 
@@ -17,6 +19,7 @@ const categoryColors: Record<string, string> = {
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState<number | null>(null);
 
   const index = projectsData.findIndex(p => p.id === id);
   const project = projectsData[index];
@@ -41,6 +44,7 @@ const ProjectDetail: React.FC = () => {
   const specs = [
     { icon: Sun,        label: 'PV Array (DC)',          val: project.pvArray,            color: 'text-neutral-900' },
     { icon: Zap,        label: 'Inverter Output (AC)',    val: project.inverterCapacity,   color: 'text-neutral-900' },
+    ...(project.inverterBrand ? [{ icon: Cpu, label: 'Inverter Brand', val: project.inverterBrand, color: 'text-neutral-900' }] : []),
     { icon: Battery,    label: 'Battery Storage (BESS)',  val: project.batteryStorage,     color: 'text-neutral-900' },
     { icon: Activity,   label: 'DC Architecture',         val: project.dcArchitecture ?? 'Standard Low-Voltage DC', color: 'text-neutral-900' },
     { icon: Building2,  label: 'Employer / Contractor',   val: project.employerContractor, color: 'text-neutral-900' },
@@ -101,20 +105,132 @@ const ProjectDetail: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* System Overview */}
+            {/* System Overview & Engineering Narrative */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               aria-labelledby="overview-heading"
-              className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm"
+              className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm space-y-6"
             >
-              <h2 id="overview-heading" className="text-lg font-bold text-neutral-950 mb-4 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-neutral-900" />
-                System Overview &amp; Engineering Narrative
-              </h2>
-              <p className="text-neutral-600 leading-relaxed text-sm sm:text-base">{project.summary}</p>
+              <div>
+                <h2 id="overview-heading" className="text-lg font-bold text-neutral-950 mb-3 flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-neutral-900" />
+                  System Overview &amp; Engineering Narrative
+                </h2>
+                <p className="text-neutral-600 leading-relaxed text-sm sm:text-base">{project.summary}</p>
+              </div>
+
+              {project.narrative && (
+                <div className="pt-5 border-t border-neutral-100 space-y-3">
+                  {/* The Operational Challenge */}
+                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
+                      <div className="p-1 rounded-md bg-amber-50 text-amber-700 border border-amber-200/80">
+                        <AlertTriangle className="w-3.5 h-3.5" />
+                      </div>
+                      The Operational Challenge
+                    </div>
+                    <p className="text-neutral-700 text-sm leading-relaxed">
+                      {project.narrative.challenge}
+                    </p>
+                  </div>
+
+                  {/* The Engineering Solution & Purpose */}
+                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
+                      <div className="p-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200/80">
+                        <Lightbulb className="w-3.5 h-3.5" />
+                      </div>
+                      The Engineering Solution &amp; System Purpose
+                    </div>
+                    <p className="text-neutral-700 text-sm leading-relaxed">
+                      {project.narrative.solution}
+                    </p>
+                  </div>
+
+                  {/* Commissioned Impact & Outcomes */}
+                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
+                      <div className="p-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                        <Target className="w-3.5 h-3.5" />
+                      </div>
+                      Commissioned Impact &amp; Operational Value
+                    </div>
+                    <p className="text-neutral-700 text-sm leading-relaxed">
+                      {project.narrative.impact}
+                    </p>
+                  </div>
+                </div>
+              )}
             </motion.section>
+
+            {/* Field Installation Photos & Video Gallery */}
+            {project.media && project.media.length > 0 && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                aria-labelledby="media-gallery-heading"
+                className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <h2 id="media-gallery-heading" className="text-lg font-bold text-neutral-950 flex items-center gap-2">
+                    <Camera className="w-5 h-5 text-neutral-900" />
+                    Field Installation Photos &amp; Video
+                  </h2>
+                  <span className="text-xs text-neutral-500 font-semibold">
+                    {project.media.length} Available
+                  </span>
+                </div>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {project.media.map((item, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => setSelectedMediaIndex(idx)}
+                      className="group/item relative rounded-xl overflow-hidden bg-neutral-900 aspect-[16/10] border border-neutral-200 cursor-pointer shadow-subtle hover:border-neutral-900 transition-all select-none"
+                    >
+                      <img
+                        src={item.url}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-300"
+                        onError={e => {
+                          e.currentTarget.style.display = 'none';
+                          const fb = e.currentTarget.parentElement?.querySelector('.detail-media-fallback');
+                          if (fb) fb.classList.remove('hidden');
+                        }}
+                      />
+                      <div className="detail-media-fallback hidden absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-gradient-to-br from-neutral-900 to-neutral-950 text-neutral-400">
+                        {item.type === 'video' ? <Film className="w-6 h-6 text-emerald-400 mb-1" /> : <Camera className="w-6 h-6 text-neutral-300 mb-1" />}
+                        <span className="text-xs font-bold text-white line-clamp-1">{item.title}</span>
+                      </div>
+
+                      {/* Badge */}
+                      <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-neutral-950/75 backdrop-blur-md border border-white/10 text-[10px] text-white font-semibold flex items-center gap-1">
+                        {item.type === 'video' ? (
+                          <>
+                            <Play className="w-2.5 h-2.5 text-emerald-400 fill-emerald-400" />
+                            <span>Video</span>
+                          </>
+                        ) : (
+                          <>
+                            <Camera className="w-2.5 h-2.5 text-neutral-300" />
+                            <span>Photo</span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-neutral-950/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-xs font-bold text-white">
+                        <Maximize2 className="w-3.5 h-3.5" />
+                        <span>View</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+            )}
 
             {/* Responsibilities */}
             <motion.section
@@ -253,6 +369,15 @@ const ProjectDetail: React.FC = () => {
             </Link>
           )}
         </div>
+
+        {/* Media Lightbox Modal */}
+        {selectedMediaIndex !== null && (
+          <ProjectMediaModal
+            project={project}
+            initialIndex={selectedMediaIndex}
+            onClose={() => setSelectedMediaIndex(null)}
+          />
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    category: 'Solar PV & Battery Energy Storage (BESS)',
+    category: 'Electrical, Solar PV & Battery Energy Storage (BESS)',
     icon: 'Sun',
     skills: [
       'Solar PV Sizing & Layout Design',
@@ -42,20 +42,23 @@ export const skillCategories: SkillCategory[] = [
       'Machine Learning Basics (Decision Trees, SVM)',
       'EasyEDA & Wokwi Circuit Simulation',
       'PVSyst System Modeling Concepts',
+      'SCADA & Grafana Real-Time Dashboards',
       'Linux / Bash Scripting',
       'Git & Version Control',
     ],
   },
   {
-    category: 'Standards, Safety & Certifications',
+    category: 'Standards, Safety & Quality Assurance',
     icon: 'ShieldCheck',
     skills: [
       'EBK Graduate Engineer Regulations',
       'IEK Engineering Practice Guidelines',
+      'IEC 62446 & IEC 60364 Photovoltaic Standards',
+      'Grid Interconnection & Utility Net Metering Codes',
       'Occupational Safety & Health (OSHA / LOTO)',
       'Project Management (PMI / PMP Methodologies)',
       'Single-Line Diagram (SLD) Preparation',
-      'Quality Assurance & Commissioning Sign-offs',
+      'Factory Acceptance & Commissioning Sign-offs (FAT/SAT)',
     ],
   },
 ];

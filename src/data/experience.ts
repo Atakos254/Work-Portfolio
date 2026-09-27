@@ -11,16 +11,17 @@ export interface WorkExperience {
 
 export const workExperience: WorkExperience[] = [
   {
-    period: 'May 2026 – Present',
+    period: 'June 2026 – Present',
     role: 'Solar PV Engineer',
     company: 'Voltifix New Energy SEZ Limited',
     location: 'Nairobi, Kenya',
     type: 'Full-Time',
     bullets: [
-      'Lead sizing, layout engineering, and field installation for hybrid C&I solar PV systems and BESS up to 150 kW AC / 336 kWh.',
-      'Deploy, configure, and troubleshoot AC & DC EV charging infrastructure ensuring strict compliance with Kenya electrical standards.',
-      'Direct string interconnections, DC/AC protection switchgear, earthing, bonding, and inverter commissioning.',
-      'Prepare engineering documentation, Single-Line Diagrams (SLDs), and test inspection sheets for statutory certifications.',
+      'Handle solar PV system design, installation, testing, and commissioning, including panel layout, inverter setup, cabling, protection devices, and system checks.',
+      'Install, commission, configure, and troubleshoot AC and DC electric vehicle (EV) charging stations, ensuring compliance with electrical standards and manufacturer specifications.',
+      'Conduct system inspections and performance assessments while ensuring compliance with technical specifications and safety standards.',
+      'Prepare technical documentation, installation records, and commissioning reports for completed projects.',
+      'Coordinate with engineers, suppliers, and installation teams to ensure timely project delivery.',
     ],
   },
   {
@@ -30,21 +31,25 @@ export const workExperience: WorkExperience[] = [
     location: 'Nairobi & Dubai',
     type: 'Full-Time',
     bullets: [
-      'Integrated smart power meters and IoT edge gateways using Modbus RTU, MQTT, and Dockerized Python pipelines.',
-      'Analyzed electrical telemetry (harmonics, power factor, reactive load) to identify anomalies and optimize operational uptime.',
-      'Built real-time telemetry dashboards and predictive maintenance reporting tools for commercial facilities.',
+      'Supported deployment, commissioning, and monitoring of energy systems using smart meters and IoT gateways for real-time electrical consumption tracking.',
+      'Troubleshot electrical and energy system faults to improve reliability, equipment performance, and operational uptime.',
+      'Analysed power and energy consumption data to support fault detection, load behaviour assessment, preventive maintenance, and energy optimisation.',
+      'Prepared technical reports, dashboards, and system performance documentation to support operational and engineering decisions.',
+      'Developed edge-to-cloud telemetry pipelines and Dockerized microservices utilizing Python, MQTT, and Modbus RTU protocols.',
     ],
   },
   {
-    period: 'Nov 2022 – Nov 2023',
+    period: 'January 2023 – December 2023',
     role: 'Intern Electrical Engineer',
     company: 'Brent Networks',
     location: 'Nairobi, Kenya',
     type: 'Internship',
     bullets: [
-      'Assisted senior engineers in preventive maintenance (PRM) across commercial electrical panels and sub-distribution boards.',
-      'Conducted on-site inspection of solar PV installations, testing open-circuit voltages (Voc) and short-circuit currents (Isc).',
-      'Documented field observations and upheld rigorous safety and LOTO (Lockout/Tagout) protocols.',
+      'Supported electrical installation, maintenance, and fault-finding activities across operational systems.',
+      'Assisted with preventive maintenance inspections to identify defects, reduce downtime, and support reliable operations.',
+      'Provided solar and renewable energy system support, including monitoring, basic troubleshooting, and performance improvement.',
+      'Conducted electrical testing, documented maintenance observations, and followed safety procedures during field activities and inspections.',
+      'Enforced Lockout/Tagout (LOTO) protocols and verified electrical circuit isolation during maintenance and testing procedures.',
     ],
   },
   {
@@ -54,8 +59,11 @@ export const workExperience: WorkExperience[] = [
     location: 'Nairobi & Eldoret, Kenya',
     type: 'Attachment',
     bullets: [
-      'Supported industrial panel layout design, AutoCAD electrical drafting, and motor control circuits (DOL, Star-Delta).',
-      'Participated in plant-wide electrical maintenance, lighting systems, and safety inspections.',
+      'Assisted with electrical wiring, lighting, and control system installations in commercial environments using detailed wiring diagrams.',
+      'Supported electrical maintenance technicians in industrial plant operations, assisting with routine equipment checks and safety compliance.',
+      'Prepared electrical schematic and panel layout support drawings using AutoCAD for industrial control systems.',
+      'Provided hands-on support during installation of electrical switchgear, motor control panels (DOL, Star-Delta), and sub-distribution boards.',
+      'Implemented circuit efficiency improvements and energy-saving adjustments aligned with electrical safety requirements and site procedures.',
     ],
   },
 ];
