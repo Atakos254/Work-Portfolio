@@ -8,7 +8,7 @@ export const Layout: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-[#090d16] dark:text-slate-100 transition-colors duration-200">
       <Navbar />
       <main id="main-content" className="flex-1 pt-16">
         <AnimatePresence mode="wait">

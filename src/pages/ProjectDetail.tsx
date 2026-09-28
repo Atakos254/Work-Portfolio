@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  ArrowLeft, Sun, Battery, Zap, MapPin, Calendar, Building2,
+  Layers, Sun, Battery, Zap, MapPin, Calendar, Building2,
   CheckCircle2, ChevronLeft, ChevronRight, Activity, Cpu, Award,
   AlertTriangle, Target, Lightbulb, Camera, Film, Play, Maximize2,
 } from 'lucide-react';
@@ -33,7 +33,7 @@ const ProjectDetail: React.FC = () => {
         <h1 className="text-2xl font-bold text-neutral-950">Project Not Found</h1>
         <p className="text-neutral-500">This project doesn't exist or the URL is incorrect.</p>
         <Link to="/projects" className="btn-primary">
-          <ArrowLeft size={16} /> Back to All Projects
+          <Layers size={16} /> Back to All Projects
         </Link>
       </div>
     );
@@ -42,122 +42,122 @@ const ProjectDetail: React.FC = () => {
   const badgeClass = categoryColors[project.category] ?? 'badge-neutral';
 
   const specs = [
-    { icon: Sun,        label: 'PV Array (DC)',          val: project.pvArray,            color: 'text-neutral-900' },
-    { icon: Zap,        label: 'Inverter Output (AC)',    val: project.inverterCapacity,   color: 'text-neutral-900' },
-    ...(project.inverterBrand ? [{ icon: Cpu, label: 'Inverter Brand', val: project.inverterBrand, color: 'text-neutral-900' }] : []),
-    { icon: Battery,    label: 'Battery Storage (BESS)',  val: project.batteryStorage,     color: 'text-neutral-900' },
-    { icon: Activity,   label: 'DC Architecture',         val: project.dcArchitecture ?? 'Standard Low-Voltage DC', color: 'text-neutral-900' },
-    { icon: Building2,  label: 'Employer / Contractor',   val: project.employerContractor, color: 'text-neutral-900' },
+    { icon: Sun,        label: 'PV Array (DC)',          val: project.pvArray,            color: 'text-neutral-900 dark:text-white' },
+    { icon: Zap,        label: 'Inverter Output (AC)',    val: project.inverterCapacity,   color: 'text-neutral-900 dark:text-white' },
+    ...(project.inverterBrand ? [{ icon: Cpu, label: 'Inverter Brand', val: project.inverterBrand, color: 'text-neutral-900 dark:text-white' }] : []),
+    { icon: Battery,    label: 'Battery Storage (BESS)',  val: project.batteryStorage,     color: 'text-neutral-900 dark:text-white' },
+    { icon: Activity,   label: 'DC Architecture',         val: project.dcArchitecture ?? 'Standard Low-Voltage DC', color: 'text-neutral-900 dark:text-white' },
+    { icon: Building2,  label: 'Employer / Contractor',   val: project.employerContractor, color: 'text-neutral-900 dark:text-white' },
   ];
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white">
+    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Breadcrumb */}
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-2 text-xs text-neutral-500 mb-8"
+          className="flex items-center gap-1.5 sm:gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 sm:mb-8 overflow-hidden"
           aria-label="Breadcrumb"
         >
-          <Link to="/" className="hover:text-neutral-950 transition-colors">Home</Link>
-          <ChevronRight size={12} />
-          <Link to="/projects" className="hover:text-neutral-950 transition-colors">Projects</Link>
-          <ChevronRight size={12} />
-          <span className="text-neutral-800 truncate max-w-xs font-medium">{project.title}</span>
+          <Link to="/" className="hover:text-neutral-950 dark:hover:text-white transition-colors shrink-0">Home</Link>
+          <ChevronRight size={12} className="shrink-0" />
+          <Link to="/projects" className="hover:text-neutral-950 dark:hover:text-white transition-colors shrink-0">Projects</Link>
+          <ChevronRight size={12} className="shrink-0" />
+          <span className="text-neutral-800 dark:text-neutral-200 truncate max-w-[140px] sm:max-w-xs font-medium">{project.title}</span>
         </motion.nav>
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
-          <div className="flex flex-wrap items-center gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
             <span className={badgeClass}>{project.category}</span>
             <span
               className={clsx(
                 'badge-emerald',
-                project.status !== 'Completed' && 'bg-neutral-100 text-neutral-800 border-neutral-200'
+                project.status !== 'Completed' && 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border-neutral-200 dark:border-neutral-700'
               )}
             >
               {project.status}
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 leading-tight mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white leading-tight mb-4 tracking-tight">
             {project.title}
           </h1>
 
-          <div className="flex flex-wrap gap-5 text-sm text-neutral-500 font-medium">
+          <div className="flex flex-wrap gap-3 sm:gap-5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-medium">
             <span className="flex items-center gap-1.5">
-              <Building2 size={15} className="text-neutral-500" /> {project.client}
+              <Building2 size={15} className="text-neutral-500 dark:text-neutral-400" /> {project.client}
             </span>
             <span className="flex items-center gap-1.5">
-              <MapPin size={15} className="text-neutral-500" /> {project.location}
+              <MapPin size={15} className="text-neutral-500 dark:text-neutral-400" /> {project.location}
             </span>
             <span className="flex items-center gap-1.5">
-              <Calendar size={15} className="text-neutral-500" /> {project.period}
+              <Calendar size={15} className="text-neutral-500 dark:text-neutral-400" /> {project.period}
             </span>
           </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {/* System Overview & Engineering Narrative */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               aria-labelledby="overview-heading"
-              className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm space-y-6"
+              className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm space-y-6"
             >
               <div>
-                <h2 id="overview-heading" className="text-lg font-bold text-neutral-950 mb-3 flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-neutral-900" />
+                <h2 id="overview-heading" className="text-lg font-bold text-neutral-950 dark:text-white mb-3 flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-neutral-900 dark:text-white" />
                   System Overview &amp; Engineering Narrative
                 </h2>
-                <p className="text-neutral-600 leading-relaxed text-sm sm:text-base">{project.summary}</p>
+                <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-sm sm:text-base">{project.summary}</p>
               </div>
 
               {project.narrative && (
-                <div className="pt-5 border-t border-neutral-100 space-y-3">
+                <div className="pt-5 border-t border-neutral-100 dark:border-neutral-800 space-y-3">
                   {/* The Operational Challenge */}
-                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
-                      <div className="p-1 rounded-md bg-amber-50 text-amber-700 border border-amber-200/80">
+                  <div className="p-4 rounded-xl bg-neutral-50/70 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100 mb-1.5">
+                      <div className="p-1 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/60">
                         <AlertTriangle className="w-3.5 h-3.5" />
                       </div>
                       The Operational Challenge
                     </div>
-                    <p className="text-neutral-700 text-sm leading-relaxed">
+                    <p className="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
                       {project.narrative.challenge}
                     </p>
                   </div>
 
                   {/* The Engineering Solution & Purpose */}
-                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
-                      <div className="p-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200/80">
+                  <div className="p-4 rounded-xl bg-neutral-50/70 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100 mb-1.5">
+                      <div className="p-1 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/60">
                         <Lightbulb className="w-3.5 h-3.5" />
                       </div>
                       The Engineering Solution &amp; System Purpose
                     </div>
-                    <p className="text-neutral-700 text-sm leading-relaxed">
+                    <p className="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
                       {project.narrative.solution}
                     </p>
                   </div>
 
                   {/* Commissioned Impact & Outcomes */}
-                  <div className="p-4 rounded-xl bg-neutral-50/70 border border-neutral-200">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5">
-                      <div className="p-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                  <div className="p-4 rounded-xl bg-neutral-50/70 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100 mb-1.5">
+                      <div className="p-1 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60">
                         <Target className="w-3.5 h-3.5" />
                       </div>
                       Commissioned Impact &amp; Operational Value
                     </div>
-                    <p className="text-neutral-700 text-sm leading-relaxed">
+                    <p className="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
                       {project.narrative.impact}
                     </p>
                   </div>
@@ -172,14 +172,14 @@ const ProjectDetail: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
                 aria-labelledby="media-gallery-heading"
-                className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm"
+                className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <h2 id="media-gallery-heading" className="text-lg font-bold text-neutral-950 flex items-center gap-2">
-                    <Camera className="w-5 h-5 text-neutral-900" />
+                  <h2 id="media-gallery-heading" className="text-lg font-bold text-neutral-950 dark:text-white flex items-center gap-2">
+                    <Camera className="w-5 h-5 text-neutral-900 dark:text-white" />
                     Field Installation Photos &amp; Video
                   </h2>
-                  <span className="text-xs text-neutral-500 font-semibold">
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold">
                     {project.media.length} Available
                   </span>
                 </div>
@@ -189,7 +189,7 @@ const ProjectDetail: React.FC = () => {
                     <div
                       key={idx}
                       onClick={() => setSelectedMediaIndex(idx)}
-                      className="group/item relative rounded-xl overflow-hidden bg-neutral-900 aspect-[16/10] border border-neutral-200 cursor-pointer shadow-subtle hover:border-neutral-900 transition-all select-none"
+                      className="group/item relative rounded-xl overflow-hidden bg-neutral-900 aspect-[16/10] border border-neutral-200 dark:border-neutral-800 cursor-pointer shadow-subtle hover:border-neutral-900 dark:hover:border-neutral-500 transition-all select-none"
                     >
                       <img
                         src={item.url}
@@ -238,16 +238,16 @@ const ProjectDetail: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               aria-labelledby="responsibilities-heading"
-              className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm"
+              className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm"
             >
-              <h2 id="responsibilities-heading" className="text-lg font-bold text-neutral-950 mb-5 flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-neutral-900" />
+              <h2 id="responsibilities-heading" className="text-lg font-bold text-neutral-950 dark:text-white mb-5 flex items-center gap-2">
+                <Cpu className="w-5 h-5 text-neutral-900 dark:text-white" />
                 Core Responsibilities &amp; Installation Scope
               </h2>
               <ul className="space-y-3">
                 {project.responsibilities.map((r, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-neutral-700">
-                    <CheckCircle2 className="w-4 h-4 text-neutral-900 shrink-0 mt-0.5" />
+                  <li key={i} className="flex items-start gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+                    <CheckCircle2 className="w-4 h-4 text-neutral-900 dark:text-emerald-400 shrink-0 mt-0.5" />
                     {r}
                   </li>
                 ))}
@@ -260,16 +260,16 @@ const ProjectDetail: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               aria-labelledby="highlights-heading"
-              className="bg-neutral-50 border border-neutral-200 rounded-2xl p-7 shadow-sm"
+              className="bg-neutral-50 dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm"
             >
-              <h2 id="highlights-heading" className="text-lg font-bold text-neutral-950 mb-5 flex items-center gap-2">
-                <Award className="w-5 h-5 text-neutral-900" />
+              <h2 id="highlights-heading" className="text-lg font-bold text-neutral-950 dark:text-white mb-5 flex items-center gap-2">
+                <Award className="w-5 h-5 text-neutral-900 dark:text-white" />
                 Engineering Highlights &amp; Technical Triumphs
               </h2>
               <ul className="space-y-3">
                 {project.keyHighlights.map((h, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-neutral-800 font-medium">
-                    <Zap className="w-4 h-4 text-neutral-900 shrink-0 mt-0.5" />
+                  <li key={i} className="flex items-start gap-3 text-sm text-neutral-800 dark:text-neutral-200 font-medium">
+                    <Zap className="w-4 h-4 text-neutral-900 dark:text-amber-400 shrink-0 mt-0.5" />
                     {h}
                   </li>
                 ))}
@@ -283,7 +283,7 @@ const ProjectDetail: React.FC = () => {
               transition={{ delay: 0.35 }}
               aria-labelledby="tech-heading"
             >
-              <h2 id="tech-heading" className="text-xs font-bold uppercase tracking-widest text-neutral-500 mb-4">
+              <h2 id="tech-heading" className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-4">
                 Technologies &amp; Equipment
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -300,8 +300,8 @@ const ProjectDetail: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.15 }}
           >
-            <div className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm sticky top-24">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 mb-5">
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm sticky top-24">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-5">
                 Technical Specifications
               </h2>
               <div className="space-y-3">
@@ -311,17 +311,17 @@ const ProjectDetail: React.FC = () => {
                     <div key={i} className="metric-pill flex-col items-start gap-1.5 p-3">
                       <div className="flex items-center gap-2">
                         <Icon className={`w-4 h-4 ${s.color} shrink-0`} />
-                        <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">
+                        <span className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-semibold">
                           {s.label}
                         </span>
                       </div>
-                      <span className="text-sm text-neutral-900 font-semibold leading-snug">{s.val}</span>
+                      <span className="text-xs sm:text-sm text-neutral-900 dark:text-white font-semibold leading-snug font-mono break-all sm:break-normal">{s.val}</span>
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-neutral-100">
+              <div className="mt-6 pt-5 border-t border-neutral-100 dark:border-neutral-800">
                 <Link
                   to="/contact"
                   className="btn-primary w-full justify-center text-sm"
@@ -336,18 +336,18 @@ const ProjectDetail: React.FC = () => {
         </div>
 
         {/* Prev / Next Navigation */}
-        <div className="flex flex-col sm:flex-row gap-4 mt-16 pt-8 border-t border-neutral-200">
+        <div className="flex flex-col sm:flex-row gap-4 mt-12 sm:mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800">
           {prev ? (
             <Link
               to={`/projects/${prev.id}`}
               aria-label={`Previous project: ${prev.title}`}
-              className="flex-1 bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm hover:border-neutral-900 transition-all group"
+              className="flex-1 bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-5 shadow-sm hover:border-neutral-900 dark:hover:border-neutral-500 transition-all group"
             >
-              <div className="flex items-center gap-2 text-xs text-neutral-400 mb-2">
+              <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-2">
                 <ChevronLeft size={14} />
                 Previous Project
               </div>
-              <div className="text-sm font-semibold text-neutral-800 group-hover:text-neutral-950 transition-colors line-clamp-2">
+              <div className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors line-clamp-2">
                 {prev.title}
               </div>
             </Link>
@@ -357,13 +357,13 @@ const ProjectDetail: React.FC = () => {
             <Link
               to={`/projects/${next.id}`}
               aria-label={`Next project: ${next.title}`}
-              className="flex-1 bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm hover:border-neutral-900 transition-all group text-right"
+              className="flex-1 bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-5 shadow-sm hover:border-neutral-900 dark:hover:border-neutral-500 transition-all group text-left sm:text-right"
             >
-              <div className="flex items-center justify-end gap-2 text-xs text-neutral-400 mb-2">
+              <div className="flex items-center justify-start sm:justify-end gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-2">
                 Next Project
                 <ChevronRight size={14} />
               </div>
-              <div className="text-sm font-semibold text-neutral-800 group-hover:text-neutral-950 transition-colors line-clamp-2">
+              <div className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors line-clamp-2">
                 {next.title}
               </div>
             </Link>

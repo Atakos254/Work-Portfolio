@@ -47,20 +47,20 @@ const HudCard: React.FC<{ item: HudItem; delay: number }> = ({ item, delay }) =>
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
-      className="relative p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm hover:shadow-card-hover hover:border-neutral-300 transition-all duration-300 group overflow-hidden"
+      className="relative p-3 sm:p-4 lg:p-4.5 rounded-2xl bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-300 group overflow-hidden"
     >
-      <div className="relative flex items-center justify-between mb-3">
-        <span className="text-xs uppercase tracking-wider text-neutral-500 font-semibold">
+      <div className="relative flex items-center justify-between mb-1.5 sm:mb-2">
+        <span className="text-[10px] sm:text-[11px] uppercase tracking-wide sm:tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold truncate pr-1">
           {item.label}
         </span>
-        <div className={`p-2 rounded-xl ${item.borderColor}`}>
-          <Icon className={`w-4 h-4 ${item.color}`} />
+        <div className={`p-1 sm:p-1.5 rounded-lg shrink-0 ${item.borderColor}`}>
+          <Icon className={`w-3.5 h-3.5 ${item.color}`} />
         </div>
       </div>
-      <div className="text-3xl lg:text-4xl font-black tracking-tight text-neutral-950 font-mono">
+      <div className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-neutral-950 dark:text-white font-mono">
         {counted}
       </div>
-      <div className="text-xs text-neutral-500 mt-1.5">{item.sub}</div>
+      <div className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 sm:mt-1 truncate">{item.sub}</div>
     </motion.div>
   );
 };
@@ -72,8 +72,8 @@ export const TelemetryHUD: React.FC = () => {
       val: profileData.metrics.totalSolarCapacityMWp,
       sub: 'Peak DC Generation',
       icon: Sun,
-      color: 'text-neutral-900',
-      borderColor: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
+      color: 'text-neutral-900 dark:text-white',
+      borderColor: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700',
       glowClass: '',
     },
     {
@@ -81,8 +81,8 @@ export const TelemetryHUD: React.FC = () => {
       val: profileData.metrics.totalBatteryStorageKWh,
       sub: 'LiFePO4 Storage',
       icon: BatteryCharging,
-      color: 'text-neutral-900',
-      borderColor: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
+      color: 'text-neutral-900 dark:text-white',
+      borderColor: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700',
       glowClass: '',
     },
     {
@@ -90,8 +90,8 @@ export const TelemetryHUD: React.FC = () => {
       val: '1,500 VDC',
       sub: 'Utility Architecture',
       icon: Zap,
-      color: 'text-neutral-900',
-      borderColor: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
+      color: 'text-neutral-900 dark:text-white',
+      borderColor: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700',
       glowClass: '',
     },
     {
@@ -99,16 +99,16 @@ export const TelemetryHUD: React.FC = () => {
       val: profileData.metrics.iotGatewaysDeployed,
       sub: 'MQTT & Modbus Gateways',
       icon: Radio,
-      color: 'text-neutral-900',
-      borderColor: 'bg-neutral-100 text-neutral-900 border border-neutral-200',
+      color: 'text-neutral-900 dark:text-white',
+      borderColor: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700',
       glowClass: '',
     },
   ];
 
   return (
-    <div className="w-full py-10 px-4 border-y border-neutral-200 bg-neutral-50/50">
+    <div className="w-full pt-0 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#090d16] transition-colors">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {items.map((item, idx) => (
             <HudCard key={idx} item={item} delay={idx * 0.1} />
           ))}

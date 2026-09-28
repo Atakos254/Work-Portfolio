@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Sun, Battery, MapPin, ArrowRight, Activity, Calendar, Zap, Cpu,
+  Sun, Battery, MapPin, FileText, Activity, Calendar, Zap, Cpu,
   Camera, Play, Maximize2
 } from 'lucide-react';
 import { ProjectItem } from '../../data/projects';
@@ -70,8 +70,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.05 }}
-      className="group flex flex-col h-full bg-white border border-neutral-200 rounded-2xl overflow-hidden
-                 hover:border-neutral-900 transition-all duration-300 hover:shadow-card-hover
+      className="group flex flex-col h-full bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden
+                 hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300 hover:shadow-card-hover
                  hover:-translate-y-1"
     >
       {/* ── Visual Media Header (16:9 standard ratio) ──────────── */}
@@ -117,20 +117,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
       </div>
 
       {/* ── Balanced Content Block ──────────────────────────────── */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         {/* Top Content (Metadata, Title, Narrative) */}
         <div>
           {/* Header Row: Client & Status */}
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 truncate">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 truncate">
               {project.client}
             </span>
             <span
               className={clsx(
                 'inline-flex items-center gap-1.5 text-[11px] px-2.5 py-0.5 rounded-full font-medium shrink-0',
                 project.status === 'Completed'
-                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                  : 'bg-amber-50 text-amber-700 border border-amber-200'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
+                  : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60'
               )}
             >
               <span
@@ -144,25 +144,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           </div>
 
           {/* Title - locked to 2 lines height with vertical centering */}
-          <h3 className="text-base font-bold text-neutral-950 group-hover:text-neutral-700 transition-colors mb-2 leading-snug line-clamp-2 h-[2.75rem] flex items-center">
+          <h3 className="text-base font-bold text-neutral-950 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors mb-2 leading-snug line-clamp-2 min-h-[2.5rem] sm:min-h-[2.75rem] flex items-center">
             {project.title}
           </h3>
 
           {/* Location & Period - clean single line */}
-          <div className="flex items-center gap-2 text-xs text-neutral-500 mb-3 h-4 truncate">
+          <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3 h-4 truncate">
             <span className="inline-flex items-center gap-1 truncate">
-              <MapPin size={12} className="text-neutral-400 shrink-0" />
+              <MapPin size={12} className="text-neutral-400 dark:text-neutral-500 shrink-0" />
               <span className="truncate">{project.location}</span>
             </span>
-            <span className="text-neutral-300">•</span>
+            <span className="text-neutral-300 dark:text-neutral-600">•</span>
             <span className="inline-flex items-center gap-1 shrink-0">
-              <Calendar size={12} className="text-neutral-400 shrink-0" />
+              <Calendar size={12} className="text-neutral-400 dark:text-neutral-500 shrink-0" />
               <span>{project.period}</span>
             </span>
           </div>
 
           {/* Summary Narrative - locked to 2 clean lines */}
-          <p className="text-xs text-neutral-600 line-clamp-2 mb-3.5 leading-relaxed h-[2.25rem] overflow-hidden">
+          <p className="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2 mb-3.5 leading-relaxed h-[2.25rem] overflow-hidden">
             {project.summary}
           </p>
         </div>
@@ -170,17 +170,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         {/* Bottom Content (Specs Panel, Tech Tags, Action CTAs) */}
         <div className="mt-auto">
           {/* Structured Key Technical Specs Box */}
-          <div className="bg-neutral-50/90 rounded-xl border border-neutral-200/80 p-2.5 mb-3.5 divide-y divide-neutral-200/60">
+          <div className="bg-neutral-50/90 dark:bg-neutral-900/80 rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-2.5 mb-3.5 divide-y divide-neutral-200/60 dark:divide-neutral-800">
             {specs.map((spec, i) => {
               const Icon = spec.icon;
               return (
                 <div key={i} className="flex items-center justify-between gap-2 py-1.5 first:pt-0 last:pb-0 text-xs">
-                  <div className="flex items-center gap-1.5 text-neutral-500 font-medium shrink-0">
-                    <Icon className="w-3.5 h-3.5 text-neutral-600 shrink-0" />
+                  <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 font-medium shrink-0">
+                    <Icon className="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-400 shrink-0" />
                     <span className="text-[11px]">{spec.label}</span>
                   </div>
                   <span
-                    className="text-neutral-900 font-semibold text-xs truncate text-right font-mono"
+                    className="text-neutral-900 dark:text-white font-semibold text-xs truncate text-right font-mono"
                     title={spec.fullText}
                   >
                     {spec.brief}
@@ -195,13 +195,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
             {project.technologies.slice(0, 3).map((tech, i) => (
               <span
                 key={i}
-                className="text-[11px] px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 border border-neutral-200 font-medium truncate max-w-[130px]"
+                className="text-[11px] px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-medium truncate max-w-[130px]"
               >
                 {tech}
               </span>
             ))}
             {project.technologies.length > 3 && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-neutral-50 text-neutral-400 shrink-0 font-medium">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-neutral-50 dark:bg-neutral-800/60 text-neutral-400 dark:text-neutral-400 shrink-0 font-medium">
                 +{project.technologies.length - 3}
               </span>
             )}
@@ -213,26 +213,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
               type="button"
               onClick={handleMediaClick}
               aria-label={`View photos and video for ${project.title}`}
-              className="group/media-btn flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl
-                         bg-white border border-neutral-300 text-xs font-semibold text-neutral-800
-                         hover:bg-neutral-950 hover:text-white hover:border-neutral-950
-                         active:bg-neutral-900 active:text-white active:border-neutral-900
-                         transition-all duration-200 h-9 shadow-xs"
+              className="btn-secondary flex-1 text-xs h-9 py-0 px-2 sm:px-3.5 group/media-btn"
             >
-              <Camera className="w-3.5 h-3.5 text-neutral-500 group-hover/media-btn:text-white group-active/media-btn:text-white transition-colors" />
+              <Camera className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
               <span>Media</span>
             </button>
             <Link
               to={`/projects/${project.id}`}
               aria-label={`View engineering specs for ${project.title}`}
-              className="group/specs-btn flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl
-                         bg-white border border-neutral-300 text-xs font-semibold text-neutral-900
-                         hover:bg-neutral-950 hover:text-white hover:border-neutral-950
-                         active:bg-neutral-900 active:text-white active:border-neutral-900
-                         transition-all duration-200 h-9 shadow-xs"
+              className="btn-primary flex-1 text-xs h-9 py-0 px-2 sm:px-3.5 group/specs-btn"
             >
+              <FileText className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/specs-btn:text-white dark:group-hover/specs-btn:text-[#090d16] group-active/specs-btn:text-white dark:group-active/specs-btn:text-[#090d16] transition-colors" />
               <span>View Specs</span>
-              <ArrowRight className="w-3.5 h-3.5 text-neutral-500 group-hover/specs-btn:text-white group-hover/specs-btn:translate-x-1 group-active/specs-btn:text-white transition-all" />
             </Link>
           </div>
         </div>

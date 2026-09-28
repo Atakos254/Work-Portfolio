@@ -1,6 +1,6 @@
 import React from 'react';
 import { workExperience, EmploymentType } from '../data/experience';
-import { MapPin, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MapPin, Calendar, CheckCircle2, Download, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -13,13 +13,13 @@ const typeBadge: Record<EmploymentType, string> = {
 
 const Experience: React.FC = () => {
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white">
+    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Header */}
         <div className="mb-14 sm:mb-16">
-          <div className="text-xs font-bold tracking-widest text-neutral-500 uppercase mb-2">Career Timeline</div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 mb-3 tracking-tight">Professional Experience</h1>
-          <p className="text-neutral-600 max-w-2xl text-base leading-relaxed">
+          <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Career Timeline</div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Professional Experience</h1>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl text-base leading-relaxed">
             A progressive track record in solar PV engineering, industrial automation, IoT telemetry, and electrical engineering —
             from internship to senior site engineer on megawatt-scale projects.
           </p>
@@ -28,7 +28,7 @@ const Experience: React.FC = () => {
         {/* Timeline */}
         <div className="relative max-w-4xl mx-auto">
           {/* Vertical line (Center on desktop, left on mobile) */}
-          <div className="absolute left-3 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-neutral-200" />
+          <div className="absolute left-3 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-neutral-200 dark:bg-neutral-800" />
 
           <div className="space-y-12">
             {workExperience.map((exp, idx) => {
@@ -52,37 +52,37 @@ const Experience: React.FC = () => {
                   </div>
 
                   {/* 2-Column Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pl-8 lg:pl-0 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pl-7 sm:pl-10 lg:pl-0 items-start">
                     {/* Left slot */}
                     {isLeft ? (
-                      <div className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 transition-all duration-300">
+                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                           <span className={typeBadge[exp.type]}>{exp.type}</span>
                           {exp.period.includes('Present') && (
-                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-200 font-semibold">
+                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 font-semibold">
                               Current Role
                             </span>
                           )}
                         </div>
 
-                        <h2 className="text-lg font-bold text-neutral-950 mb-1">{exp.role}</h2>
-                        <div className="text-neutral-900 font-semibold text-sm mb-3">{exp.company}</div>
+                        <h2 className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white mb-1">{exp.role}</h2>
+                        <div className="text-neutral-900 dark:text-neutral-200 font-semibold text-sm mb-3">{exp.company}</div>
 
-                        <div className="flex flex-wrap gap-4 text-xs text-neutral-500 mb-5 font-medium">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-neutral-500 dark:text-neutral-400 mb-4 sm:mb-5 font-medium">
                           <span className="flex items-center gap-1.5">
-                            <Calendar size={13} className="text-neutral-500" />
+                            <Calendar size={13} className="text-neutral-500 dark:text-neutral-400" />
                             {exp.period}
                           </span>
                           <span className="flex items-center gap-1.5">
-                            <MapPin size={13} className="text-neutral-500" />
+                            <MapPin size={13} className="text-neutral-500 dark:text-neutral-400" />
                             {exp.location}
                           </span>
                         </div>
 
                         <ul className="space-y-2.5">
                           {exp.bullets.map((b, bi) => (
-                            <li key={bi} className="flex items-start gap-2.5 text-sm text-neutral-600 leading-relaxed">
-                              <CheckCircle2 size={15} className="text-neutral-900 shrink-0 mt-0.5" />
+                            <li key={bi} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                              <CheckCircle2 size={15} className="text-neutral-900 dark:text-emerald-400 shrink-0 mt-0.5" />
                               {b}
                             </li>
                           ))}
@@ -94,34 +94,34 @@ const Experience: React.FC = () => {
 
                     {/* Right slot */}
                     {!isLeft ? (
-                      <div className="bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 transition-all duration-300">
+                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                           <span className={typeBadge[exp.type]}>{exp.type}</span>
                           {exp.period.includes('Present') && (
-                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-800 border border-neutral-200 font-semibold">
+                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 font-semibold">
                               Current Role
                             </span>
                           )}
                         </div>
 
-                        <h2 className="text-lg font-bold text-neutral-950 mb-1">{exp.role}</h2>
-                        <div className="text-neutral-900 font-semibold text-sm mb-3">{exp.company}</div>
+                        <h2 className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white mb-1">{exp.role}</h2>
+                        <div className="text-neutral-900 dark:text-neutral-200 font-semibold text-sm mb-3">{exp.company}</div>
 
-                        <div className="flex flex-wrap gap-4 text-xs text-neutral-500 mb-5 font-medium">
+                        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs text-neutral-500 dark:text-neutral-400 mb-4 sm:mb-5 font-medium">
                           <span className="flex items-center gap-1.5">
-                            <Calendar size={13} className="text-neutral-500" />
+                            <Calendar size={13} className="text-neutral-500 dark:text-neutral-400" />
                             {exp.period}
                           </span>
                           <span className="flex items-center gap-1.5">
-                            <MapPin size={13} className="text-neutral-500" />
+                            <MapPin size={13} className="text-neutral-500 dark:text-neutral-400" />
                             {exp.location}
                           </span>
                         </div>
 
                         <ul className="space-y-2.5">
                           {exp.bullets.map((b, bi) => (
-                            <li key={bi} className="flex items-start gap-2.5 text-sm text-neutral-600 leading-relaxed">
-                              <CheckCircle2 size={15} className="text-neutral-900 shrink-0 mt-0.5" />
+                            <li key={bi} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                              <CheckCircle2 size={15} className="text-neutral-900 dark:text-emerald-400 shrink-0 mt-0.5" />
                               {b}
                             </li>
                           ))}
@@ -138,20 +138,21 @@ const Experience: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-20 text-center">
-          <p className="text-slate-500 mb-5 text-sm">Want the full picture?</p>
-          <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-14 sm:mt-20 text-center">
+          <p className="text-neutral-500 dark:text-neutral-400 mb-4 sm:mb-5 text-sm">Want the full picture?</p>
+          <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
             <a
               href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
               download
-              className="btn-primary"
+              className="btn-primary w-full sm:w-auto"
               aria-label="Download experience report"
             >
+              <Download size={16} />
               Download Experience Report
             </a>
-            <Link to="/about" className="btn-secondary">
+            <Link to="/about" className="btn-secondary w-full sm:w-auto">
+              <Award size={16} />
               View Skills & Credentials
-              <ArrowRight size={16} />
             </Link>
           </div>
         </div>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Download, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '../common/ThemeToggle';
+import { EngineeringLogo } from '../common/EngineeringLogo';
 
 const navLinks = [
   { to: '/',           label: 'Home' },
@@ -28,8 +30,8 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b border-neutral-200/90 shadow-sm'
-          : 'bg-white/85 backdrop-blur-md border-b border-neutral-100'
+          ? 'bg-white/95 dark:bg-[#090d16]/95 backdrop-blur-xl border-b border-neutral-200/90 dark:border-neutral-800 shadow-sm'
+          : 'bg-white/85 dark:bg-[#090d16]/85 backdrop-blur-md border-b border-neutral-100 dark:border-neutral-800/80'
       }`}
     >
       <div className="section-wrapper">
@@ -37,14 +39,14 @@ export const Navbar: React.FC = () => {
 
           {/* Logo / Name Badge */}
           <Link to="/" className="flex items-center gap-3 group" aria-label="Emmanuel Atakos — Home">
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-neutral-950 text-white shadow-sm">
-              <span className="font-black text-sm tracking-tight">EA</span>
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-neutral-950 dark:bg-white text-white dark:text-neutral-950 shadow-sm transition-all duration-200 group-hover:scale-105">
+              <EngineeringLogo className="w-5 h-5" />
             </div>
-            <div className="hidden sm:block">
-              <div className="text-sm font-bold text-neutral-950 tracking-wide group-hover:text-neutral-700 transition-colors">
+            <div>
+              <div className="text-xs sm:text-sm font-bold text-neutral-950 dark:text-white tracking-wide group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors">
                 EMMANUEL ATAKOS
               </div>
-              <div className="text-[11px] text-neutral-500 font-medium italic">
+              <div className="hidden sm:block text-[11px] text-neutral-500 dark:text-neutral-400 font-medium italic">
                 “Engineers create the world that never was”
               </div>
             </div>
@@ -60,8 +62,8 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'text-neutral-950 bg-neutral-100 font-semibold'
-                      : 'text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50'
+                      ? 'text-neutral-950 dark:text-white bg-neutral-100 dark:bg-neutral-800 font-semibold'
+                      : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/60'
                   }`
                 }
               >
@@ -72,6 +74,7 @@ export const Navbar: React.FC = () => {
 
           {/* Actions */}
           <div className="hidden lg:flex items-center gap-2.5">
+            <ThemeToggle />
             <a
               href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
               download
@@ -87,12 +90,13 @@ export const Navbar: React.FC = () => {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile controls */}
           <div className="flex lg:hidden items-center gap-2">
+            <ThemeToggle />
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-neutral-200 hover:border-neutral-400 transition-colors text-neutral-900"
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-neutral-300 dark:border-[#334155] bg-white dark:bg-[#0f172a] text-neutral-900 dark:text-[#f8fafc] hover:bg-neutral-950 hover:text-white hover:border-neutral-950 dark:hover:bg-white dark:hover:text-[#090d16] dark:hover:border-white active:bg-neutral-900 dark:active:bg-white dark:active:text-[#090d16] transition-all cursor-pointer"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -108,7 +112,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden overflow-hidden bg-white border-b border-neutral-200 shadow-lg"
+            className="lg:hidden overflow-hidden bg-white dark:bg-[#0e1422] border-b border-neutral-200 dark:border-neutral-800 shadow-lg"
           >
             <nav className="section-wrapper py-4 flex flex-col gap-1" aria-label="Mobile navigation">
               {navLinks.map(link => (
@@ -119,15 +123,15 @@ export const Navbar: React.FC = () => {
                   className={({ isActive }) =>
                     `px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       isActive
-                        ? 'text-neutral-950 bg-neutral-100 font-semibold'
-                        : 'text-neutral-700 hover:text-neutral-950 hover:bg-neutral-50'
+                        ? 'text-neutral-950 dark:text-white bg-neutral-100 dark:bg-neutral-800 font-semibold'
+                        : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/60'
                     }`
                   }
                 >
                   {link.label}
                 </NavLink>
               ))}
-              <div className="flex gap-2 pt-3 border-t border-neutral-100 mt-2">
+              <div className="flex gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-800 mt-2">
                 <a
                   href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
                   download
