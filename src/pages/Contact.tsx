@@ -69,6 +69,9 @@ const Contact: React.FC = () => {
     }
   };
 
+  const WEB3FORMS_ACCESS_KEY =
+    import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'f63a2ed9-d435-4a60-89dd-3e2d578e9ff4';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
@@ -80,29 +83,29 @@ const Contact: React.FC = () => {
     setServerError(null);
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${profileData.contact.email}`, {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
           name: form.name,
           email: form.email,
-          inquiryType: form.subject,
+          subject: `Portfolio Inquiry: [${form.subject}] from ${form.name}`,
+          inquiry_type: form.subject,
           message: form.message,
-          _subject: `New Portfolio Inquiry: [${form.subject}] from ${form.name}`,
-          _replyto: form.email,
-          _template: 'table',
-          _captcha: 'false',
+          from_name: form.name,
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.success) {
         setStatus('success');
       } else {
-        const data = await response.json().catch(() => null);
-        throw new Error(data?.message || 'Failed to submit form. Please try again.');
+        throw new Error(data?.message || 'Failed to submit form. Please check your access key or try again.');
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Unable to send message right now.';
@@ -129,15 +132,15 @@ const Contact: React.FC = () => {
         {/* Header */}
         <div className="mb-10 sm:mb-14">
           <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Get In Touch</div>
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Let’s Build Something Resilient</h1>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Let’s Build Something Efficient</h1>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-xl text-sm sm:text-base leading-relaxed">
             Open to select consulting engagements, system deployments and forward-looking engineering roles across East Africa &amp; the World.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-stretch">
           {/* ── Left Column ──────────────────────────────────────── */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 flex flex-col justify-between space-y-6 lg:space-y-0 h-full">
             {/* Direct Contact */}
             <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm">
               <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-5">
@@ -261,8 +264,8 @@ const Contact: React.FC = () => {
           </div>
 
           {/* ── Right Column — Form ───────────────────────────────── */}
-          <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm">
+          <div className="lg:col-span-3 flex flex-col h-full">
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm h-full flex flex-col justify-between">
               <h2 className="text-xl font-bold text-neutral-950 dark:text-white mb-4 tracking-tight">Send an Inquiry</h2>
 
               <AnimatePresence mode="wait">
@@ -271,7 +274,7 @@ const Contact: React.FC = () => {
                     key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center justify-center min-h-[440px] text-center gap-4 py-8"
+                    className="flex-1 flex flex-col items-center justify-center text-center gap-4 py-8"
                   >
                     <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 flex items-center justify-center">
                       <CheckCircle size={32} className="text-emerald-600 dark:text-emerald-400" />
@@ -294,7 +297,7 @@ const Contact: React.FC = () => {
                     animate={{ opacity: 1 }}
                     onSubmit={handleSubmit}
                     noValidate
-                    className="space-y-4"
+                    className="flex-1 flex flex-col justify-between space-y-4"
                     aria-label="Contact inquiry form"
                   >
                     {/* Name */}
@@ -357,18 +360,18 @@ const Contact: React.FC = () => {
                     </div>
 
                     {/* Message */}
-                    <div>
+                    <div className="flex-1 flex flex-col">
                       <label htmlFor="contact-message" className="block text-xs font-bold text-neutral-700 dark:text-neutral-300 mb-1.5 uppercase tracking-wider">
                         Project Details / Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         id="contact-message"
                         name="message"
-                        rows={4}
+                        rows={3}
                         value={form.message}
                         onChange={handleChange}
                         placeholder="Describe your project, location, load requirements, or how I can help…"
-                        className={inputClass('message') + ' resize-none min-h-[101px]'}
+                        className={inputClass('message') + ' resize-none flex-1 min-h-[85px]'}
                       />
                       <div className="flex justify-between mt-1">
                         {errors.message

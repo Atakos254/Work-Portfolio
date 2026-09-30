@@ -52,7 +52,7 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-neutral-950/85 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-neutral-950/85 backdrop-blur-md dark">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -179,19 +179,36 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
 
             {/* Thumbnail selector */}
             {mediaList.length > 1 && (
-              <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 sm:pb-0 shrink-0">
+              <div
+                className="flex items-center gap-2 overflow-x-auto max-w-full py-1.5 px-1 shrink-0 no-scrollbar"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
                 {mediaList.map((m, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveIndex(idx)}
-                    className={`relative w-14 h-10 rounded-lg overflow-hidden border transition-all shrink-0 ${
+                    aria-label={`View media ${idx + 1}: ${m.title}`}
+                    className={`relative w-14 h-10 rounded-lg overflow-hidden border transition-all shrink-0 cursor-pointer ${
                       activeIndex === idx
-                        ? 'border-white ring-2 ring-white/30 scale-105'
-                        : 'border-neutral-700 opacity-60 hover:opacity-100'
+                        ? 'border-emerald-400 ring-2 ring-emerald-500/40 scale-105 opacity-100 shadow-md'
+                        : 'border-neutral-700/80 opacity-60 hover:opacity-100 hover:border-neutral-500'
                     }`}
                   >
                     <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-[10px] text-neutral-300">
-                      {m.type === 'video' ? <Play className="w-4 h-4 text-emerald-400" /> : <Camera className="w-4 h-4 text-neutral-400" />}
+                      {m.type === 'image' ? (
+                        <img
+                          src={m.url}
+                          alt={m.title}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-neutral-800/90 text-emerald-400">
+                          <Play className="w-4 h-4 fill-emerald-400/20" />
+                        </div>
+                      )}
                     </div>
                   </button>
                 ))}
