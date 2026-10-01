@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Sun, Battery, MapPin, FileText, Activity, Calendar, Zap, Cpu,
-  Camera, Play, Maximize2
+  Camera
 } from 'lucide-react';
 import { ProjectItem } from '../../data/projects';
 import { motion } from 'framer-motion';
@@ -53,8 +53,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         },
       ];
 
-  const mediaList = project.media || [];
-  const hasVideo = mediaList.some(m => m.type === 'video');
 
   const handleMediaClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -83,6 +81,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         <img
           src={project.coverImage || project.imagePlaceholder}
           alt={project.title}
+          style={project.coverImagePosition ? { objectPosition: project.coverImagePosition } : undefined}
           className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
           onError={e => {
             e.currentTarget.style.display = 'none';
@@ -105,14 +104,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide backdrop-blur-md bg-neutral-950/75 text-white border border-white/15 shadow-sm">
             {project.category}
           </span>
-        </div>
-
-        {/* Hover Quick-Preview Overlay */}
-        <div className="absolute inset-0 bg-neutral-950/45 opacity-0 group-hover/media:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-[2px]">
-          <div className="px-3.5 py-1.5 rounded-full bg-white text-neutral-950 flex items-center gap-1.5 shadow-lg transform -translate-y-1 group-hover/media:translate-y-0 transition-transform">
-            {hasVideo ? <Play className="w-3.5 h-3.5 fill-neutral-950" /> : <Maximize2 className="w-3.5 h-3.5" />}
-            <span>View Photos &amp; Video</span>
-          </div>
         </div>
       </div>
 
