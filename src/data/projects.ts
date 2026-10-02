@@ -211,12 +211,6 @@ export const projectsData: ProjectItem[] = [
         caption: 'Combiner enclosures with high-voltage DC string breakers, surge protection devices, and isolator switches.',
       },
       {
-        type: 'image',
-        url: '/media/projects/mushroom-motors-hybrid/IMG-20260615-WA0038.jpg',
-        title: 'On-Site Commissioning & Plant Inspection',
-        caption: 'Lead electrical engineer Emmanuel Atakos verifying system integration, grounding, and enclosure protection.',
-      },
-      {
         type: 'video',
         url: '/media/projects/mushroom-motors-hybrid/Panel & Structure Design.mp4',
         title: 'Carport Structural CAD Flythrough',
