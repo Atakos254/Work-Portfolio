@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Sun, Battery, MapPin, FileText, Activity, Calendar, Zap, Cpu,
-  Camera
+  Camera, Film
 } from 'lucide-react';
 import { ProjectItem } from '../../data/projects';
 import { motion } from 'framer-motion';
@@ -206,7 +206,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
               aria-label={`View photos and video for ${project.title}`}
               className="btn-secondary flex-1 text-xs h-9 py-0 px-2 sm:px-3.5 group/media-btn"
             >
-              <Camera className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
+              {project.media?.some(m => m.type === 'video') ? (
+                <Film className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
+              ) : (
+                <Camera className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
+              )}
               <span>Media</span>
             </button>
             <Link

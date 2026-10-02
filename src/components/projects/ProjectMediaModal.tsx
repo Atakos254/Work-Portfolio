@@ -93,16 +93,34 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
           {/* Main Media Viewer Stage */}
           <div className="relative flex-1 bg-black flex items-center justify-center min-h-[220px] sm:min-h-[420px] max-h-[50vh] sm:max-h-[62vh] overflow-hidden group">
             {currentMedia.type === 'video' ? (
-              <video
-                key={currentMedia.url}
-                src={currentMedia.url}
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-full max-h-[60vh] object-contain"
-              >
-                Your browser does not support the video tag.
-              </video>
+              <div className="relative w-full h-full flex items-center justify-center bg-black">
+                <video
+                  key={currentMedia.url}
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full max-h-[60vh] object-contain"
+                  onError={e => {
+                    e.currentTarget.style.display = 'none';
+                    const fb = e.currentTarget.parentElement?.querySelector('.modal-video-fallback');
+                    if (fb) fb.classList.remove('hidden');
+                  }}
+                >
+                  <source src={encodeURI(currentMedia.url).replace(/&/g, '%26')} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="modal-video-fallback hidden flex flex-col items-center justify-center p-8 text-center text-neutral-400">
+                  <div className="p-4 rounded-2xl bg-neutral-800/80 border border-neutral-700 mb-3 text-emerald-400">
+                    <Film className="w-10 h-10" />
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-1">{currentMedia.title}</h4>
+                  <p className="text-xs text-neutral-400 max-w-md">
+                    Unable to stream video file: <code className="text-neutral-300 bg-neutral-800 px-1.5 py-0.5 rounded">{currentMedia.url}</code>
+                  </p>
+                </div>
+              </div>
             ) : (
               <div className="relative w-full h-full flex items-center justify-center">
                 <img
@@ -197,7 +215,7 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                     <div className="w-full h-full bg-neutral-800 flex items-center justify-center text-[10px] text-neutral-300">
                       {m.type === 'image' ? (
                         <img
-                          src={m.url}
+                          src={encodeURI(m.url).replace(/&/g, '%26')}
                           alt={m.title}
                           className="w-full h-full object-cover"
                           onError={(e) => {
@@ -205,8 +223,9 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                           }}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-neutral-800/90 text-emerald-400">
-                          <Play className="w-4 h-4 fill-emerald-400/20" />
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900 text-emerald-400 gap-0.5">
+                          <Play className="w-3.5 h-3.5 fill-emerald-400/40 text-emerald-400" />
+                          <span className="text-[8px] font-bold tracking-tight text-neutral-300">VIDEO</span>
                         </div>
                       )}
                     </div>

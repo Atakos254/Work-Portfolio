@@ -191,16 +191,33 @@ const ProjectDetail: React.FC = () => {
                       onClick={() => setSelectedMediaIndex(idx)}
                       className="group/item relative rounded-xl overflow-hidden bg-neutral-900 aspect-[16/10] border border-neutral-200 dark:border-neutral-800 cursor-pointer shadow-subtle hover:border-neutral-900 dark:hover:border-neutral-500 transition-all select-none"
                     >
-                      <img
-                        src={item.url}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-300"
-                        onError={e => {
-                          e.currentTarget.style.display = 'none';
-                          const fb = e.currentTarget.parentElement?.querySelector('.detail-media-fallback');
-                          if (fb) fb.classList.remove('hidden');
-                        }}
-                      />
+                      {item.type === 'video' ? (
+                        <div className="relative w-full h-full bg-neutral-950 flex items-center justify-center">
+                          <video
+                            src={encodeURI(item.url).replace(/&/g, '%26')}
+                            preload="metadata"
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover pointer-events-none opacity-80 group-hover/item:opacity-100 group-hover/item:scale-105 transition-all duration-300"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="w-10 h-10 rounded-full bg-neutral-950/85 border border-white/25 flex items-center justify-center text-white backdrop-blur-sm shadow-xl group-hover/item:scale-110 transition-transform">
+                              <Play className="w-4 h-4 text-emerald-400 fill-emerald-400 ml-0.5" />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <img
+                          src={encodeURI(item.url).replace(/&/g, '%26')}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-300"
+                          onError={e => {
+                            e.currentTarget.style.display = 'none';
+                            const fb = e.currentTarget.parentElement?.querySelector('.detail-media-fallback');
+                            if (fb) fb.classList.remove('hidden');
+                          }}
+                        />
+                      )}
                       <div className="detail-media-fallback hidden absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-gradient-to-br from-neutral-900 to-neutral-950 text-neutral-400">
                         {item.type === 'video' ? <Film className="w-6 h-6 text-emerald-400 mb-1" /> : <Camera className="w-6 h-6 text-neutral-300 mb-1" />}
                         <span className="text-xs font-bold text-white line-clamp-1">{item.title}</span>
