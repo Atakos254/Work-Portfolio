@@ -96,6 +96,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setOpen(v => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
               className="w-9 h-9 flex items-center justify-center rounded-xl border border-neutral-300 dark:border-[#334155] bg-white dark:bg-[#0f172a] text-neutral-900 dark:text-[#f8fafc] hover:bg-neutral-950 hover:text-white hover:border-neutral-950 dark:hover:bg-white dark:hover:text-[#090d16] dark:hover:border-white active:bg-neutral-900 dark:active:bg-white dark:active:text-[#090d16] transition-all cursor-pointer"
             >
               {open ? <X size={18} /> : <Menu size={18} />}
@@ -104,47 +105,68 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer & Backdrop */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden overflow-hidden bg-white dark:bg-[#0e1422] border-b border-neutral-200 dark:border-neutral-800 shadow-lg"
-          >
-            <nav className="section-wrapper py-4 flex flex-col gap-1" aria-label="Mobile navigation">
-              {navLinks.map(link => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) =>
-                    `px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                      isActive
-                        ? 'text-neutral-950 dark:text-white bg-neutral-100 dark:bg-neutral-800 font-semibold'
-                        : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/60'
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-              <div className="flex gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-800 mt-2">
-                <a
-                  href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
-                  download
-                  className="btn-secondary flex-1 justify-center text-xs py-2.5"
-                >
-                  <Download size={14} /> Download CV
-                </a>
-                <Link to="/contact" className="btn-primary flex-1 justify-center text-xs py-2.5">
-                  <Mail size={14} /> Get in Touch
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
+          <>
+            {/* Backdrop for tapping outside */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 top-16 bg-neutral-950/50 backdrop-blur-xs z-40 lg:hidden"
+              aria-hidden="true"
+            />
+
+            {/* Slide-down Drawer */}
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative z-50 lg:hidden overflow-hidden bg-white/98 dark:bg-[#0e1422]/98 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 shadow-xl"
+            >
+              <nav className="section-wrapper py-3.5 flex flex-col gap-1" aria-label="Mobile navigation">
+                {navLinks.map(link => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={link.to === '/'}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-between active:scale-[0.99] ${
+                        isActive
+                          ? 'text-neutral-950 dark:text-white bg-neutral-100 dark:bg-neutral-800/80 font-bold'
+                          : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/50'
+                      }`
+                    }
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-xs text-neutral-400 dark:text-neutral-500 font-mono">→</span>
+                  </NavLink>
+                ))}
+                <div className="flex gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-800 mt-1">
+                  <a
+                    href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
+                    download
+                    onClick={() => setOpen(false)}
+                    className="btn-secondary flex-1 justify-center text-xs py-2.5"
+                  >
+                    <Download size={14} /> Download CV
+                  </a>
+                  <Link
+                    to="/contact"
+                    onClick={() => setOpen(false)}
+                    className="btn-primary flex-1 justify-center text-xs py-2.5"
+                  >
+                    <Mail size={14} /> Get in Touch
+                  </Link>
+                </div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
