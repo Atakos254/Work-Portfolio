@@ -47,9 +47,9 @@ const HudCard: React.FC<{ item: HudItem; delay: number }> = ({ item, delay }) =>
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay }}
-      className="relative p-3 sm:p-4 lg:p-4.5 rounded-2xl bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-300 group overflow-hidden"
+      className="relative p-2.5 sm:p-4 lg:p-4.5 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-300 group overflow-hidden"
     >
-      <div className="relative flex items-center justify-between mb-1.5 sm:mb-2">
+      <div className="relative flex items-center justify-between mb-1 sm:mb-2">
         <span className="text-[10px] sm:text-[11px] uppercase tracking-wide sm:tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold truncate pr-1">
           {item.label}
         </span>
@@ -57,7 +57,7 @@ const HudCard: React.FC<{ item: HudItem; delay: number }> = ({ item, delay }) =>
           <Icon className={`w-3.5 h-3.5 ${item.color}`} />
         </div>
       </div>
-      <div className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-neutral-950 dark:text-white font-mono">
+      <div className="text-base xs:text-lg sm:text-2xl lg:text-3xl font-black tracking-tight text-neutral-950 dark:text-white font-mono tabular-nums leading-tight">
         {counted}
       </div>
       <div className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 sm:mt-1 truncate">{item.sub}</div>

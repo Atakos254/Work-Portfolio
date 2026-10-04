@@ -51,20 +51,20 @@ const ProjectDetail: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
+    <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Breadcrumb */}
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-1.5 sm:gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 sm:mb-8 overflow-hidden"
+          className="flex items-center gap-1.5 sm:gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-5 sm:mb-8 overflow-hidden"
           aria-label="Breadcrumb"
         >
           <Link to="/" className="hover:text-neutral-950 dark:hover:text-white transition-colors shrink-0">Home</Link>
           <ChevronRight size={12} className="shrink-0" />
           <Link to="/projects" className="hover:text-neutral-950 dark:hover:text-white transition-colors shrink-0">Projects</Link>
           <ChevronRight size={12} className="shrink-0" />
-          <span className="text-neutral-800 dark:text-neutral-200 truncate max-w-[140px] sm:max-w-xs font-medium">{project.title}</span>
+          <span className="text-neutral-800 dark:text-neutral-200 truncate max-w-[130px] sm:max-w-xs font-medium">{project.title}</span>
         </motion.nav>
 
         {/* Header */}
@@ -77,17 +77,37 @@ const ProjectDetail: React.FC = () => {
             <span className={badgeClass}>{project.category}</span>
             <span
               className={clsx(
-                'badge-emerald',
-                project.status !== 'Completed' && 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border-neutral-200 dark:border-neutral-700'
+                'inline-flex items-center gap-1.5 text-xs px-2.5 py-0.5 rounded-full font-medium',
+                project.status === 'Completed'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
+                  : project.status === 'Continuous'
+                  ? 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60'
+                  : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60'
               )}
             >
+              <span
+                className={clsx(
+                  'w-1.5 h-1.5 rounded-full',
+                  project.status === 'Completed'
+                    ? 'bg-emerald-500'
+                    : project.status === 'Continuous'
+                    ? 'bg-cyan-500 animate-pulse'
+                    : 'bg-amber-500 animate-pulse'
+                )}
+              />
               {project.status}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white leading-tight mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white leading-tight mb-2 tracking-tight">
             {project.title}
           </h1>
+
+          {project.subtitle && (
+            <p className="text-sm sm:text-lg font-medium text-emerald-600 dark:text-emerald-400 mb-4">
+              {project.subtitle}
+            </p>
+          )}
 
           <div className="flex flex-wrap gap-3 sm:gap-5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-medium">
             <span className="flex items-center gap-1.5">
@@ -194,7 +214,7 @@ const ProjectDetail: React.FC = () => {
                       {item.type === 'video' ? (
                         <div className="relative w-full h-full bg-neutral-950 flex items-center justify-center">
                           <video
-                            src={encodeURI(item.url).replace(/&/g, '%26')}
+                            src={encodeURI(item.url)}
                             preload="metadata"
                             muted
                             playsInline
@@ -208,7 +228,7 @@ const ProjectDetail: React.FC = () => {
                         </div>
                       ) : (
                         <img
-                          src={encodeURI(item.url).replace(/&/g, '%26')}
+                          src={encodeURI(item.url)}
                           alt={item.title}
                           className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-300"
                           onError={e => {
@@ -317,7 +337,7 @@ const ProjectDetail: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.15 }}
           >
-            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm sticky top-24">
+            <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-sm lg:sticky lg:top-24">
               <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-5">
                 Technical Specifications
               </h2>

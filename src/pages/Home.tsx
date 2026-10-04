@@ -2,10 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Sun, BatteryCharging, Cpu,
-  Award, MessageSquare, Layers,
+  Award, MessageSquare, Layers, ArrowRight,
 } from 'lucide-react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { TelemetryHUD } from '../components/common/TelemetryHUD';
+import { projectsData, ProjectItem } from '../data/projects';
+import { ProjectCard } from '../components/projects/ProjectCard';
+import { ProjectMediaModal } from '../components/projects/ProjectMediaModal';
 
 /* ── Rotating Hero Words ───────────────────────────────────────────── */
 const ROTATING_WORDS = [
@@ -41,11 +44,23 @@ const features = [
   },
 ];
 
+/* ── Major Projects Selection (3 Featured Flagship Projects) ──────── */
+const MAJOR_PROJECT_IDS = [
+  'tatu-city-link-grid-tied',
+  'mushroom-motors-hybrid',
+  'prof-jacob-bifacial-carport',
+];
+
+const featuredProjects = MAJOR_PROJECT_IDS.map((id) =>
+  projectsData.find((p) => p.id === id)!
+).filter(Boolean);
+
 /* ── Home Page ─────────────────────────────────────────────────────── */
 const Home: React.FC = () => {
   const heroRef = useRef(null);
   const inView = useInView(heroRef, { once: true });
   const [wordIndex, setWordIndex] = useState(0);
+  const [activeMediaProject, setActiveMediaProject] = useState<ProjectItem | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -108,16 +123,16 @@ const Home: React.FC = () => {
                 I craft efficient, high-performance systems with a focus on clean engineering, system stability, and enduring reliability.
               </p>
 
-              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-2.5 w-full">
-                <Link to="/projects" id="hero-cta-projects" className="btn-primary flex-1 sm:flex-initial min-w-[120px] sm:min-w-[150px] text-xs sm:text-sm py-2 sm:py-2.5 px-3 sm:px-4 justify-center">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center lg:justify-start items-center gap-2 sm:gap-2.5 w-full">
+                <Link to="/projects" id="hero-cta-projects" className="btn-primary text-xs sm:text-sm py-2.5 px-3 sm:px-4 justify-center">
                   <Layers size={15} />
                   Explore Projects
                 </Link>
-                <Link to="/about" id="hero-cta-credentials" className="btn-secondary flex-1 sm:flex-initial min-w-[120px] sm:min-w-[150px] text-xs sm:text-sm py-2 sm:py-2.5 px-3 sm:px-4 justify-center">
+                <Link to="/about" id="hero-cta-credentials" className="btn-secondary text-xs sm:text-sm py-2.5 px-3 sm:px-4 justify-center">
                   <Award size={15} />
                   View Credentials
                 </Link>
-                <Link to="/contact" id="hero-cta-contact" className="btn-secondary w-full sm:w-auto sm:flex-initial min-w-[120px] sm:min-w-[150px] text-xs sm:text-sm py-2 sm:py-2.5 px-3 sm:px-4 justify-center">
+                <Link to="/contact" id="hero-cta-contact" className="btn-secondary col-span-2 sm:col-span-1 text-xs sm:text-sm py-2.5 px-3 sm:px-4 justify-center">
                   <MessageSquare size={15} />
                   Let's Talk
                 </Link>
@@ -152,21 +167,70 @@ const Home: React.FC = () => {
       {/* ── Metrics HUD ──────────────────────────────────────────── */}
       <TelemetryHUD />
 
-      {/* ── Core Engineering Disciplines ─────────────────────────── */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors" aria-labelledby="disciplines-heading">
+      {/* ── Featured Major Projects ─────────────────────────────── */}
+      <section className="py-8 sm:py-16 lg:py-20 bg-neutral-50/70 dark:bg-[#0c101c] border-y border-neutral-200/80 dark:border-neutral-800/80 transition-colors" aria-labelledby="featured-projects-heading">
         <div className="section-wrapper">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-12">
+            <div>
+              <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">
+                Flagship Engineering
+              </div>
+              <h2 id="featured-projects-heading" className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-950 dark:text-white tracking-tight">
+                Major Projects Showcase
+              </h2>
+              <p className="text-neutral-600 dark:text-neutral-400 max-w-xl text-sm sm:text-base leading-relaxed mt-2">
+                Proven field execution across utility-scale solar PV, industrial commercial microgrids, and high-capacity residential storage.
+              </p>
+            </div>
+            <Link
+              to="/projects"
+              id="home-view-all-projects"
+              className="inline-flex items-center gap-2 text-sm font-bold text-neutral-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group shrink-0 self-start sm:self-auto"
+            >
+              <span>View All 16 Projects</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {featuredProjects.map((project, i) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={i}
+                onOpenMedia={setActiveMediaProject}
+              />
+            ))}
+          </div>
+
+          <div className="mt-8 sm:mt-12 text-center">
+            <Link
+              to="/projects"
+              id="home-explore-all-projects-btn"
+              className="btn-primary w-full sm:w-auto inline-flex text-xs sm:text-sm py-2.5 px-6 shadow-md justify-center"
+            >
+              <Layers size={16} />
+              Explore Complete Project Portfolio
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Core Engineering Disciplines ─────────────────────────── */}
+      <section className="py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors" aria-labelledby="disciplines-heading">
+        <div className="section-wrapper">
+          <div className="text-center mb-6 sm:mb-12">
             <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">
               Capabilities & Focus
             </div>
-            <h2 id="disciplines-heading" className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">
+            <h2 id="disciplines-heading" className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-950 dark:text-white mb-2.5 tracking-tight">
               Core Engineering Disciplines
             </h2>
             <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
               Specialised across the full clean energy & smart-grid technology stack — from high-voltage field commissioning to cloud data pipelines.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             {features.map((f, i) => {
               const Icon = f.icon;
               return (
@@ -176,9 +240,9 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-600 transition-all duration-300 group"
+                  className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4.5 sm:p-6 lg:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-600 transition-all duration-300 group"
                 >
-                  <div className={`inline-flex p-2.5 sm:p-3 rounded-xl border mb-4 sm:mb-5 ${f.bg}`}>
+                  <div className={`inline-flex p-2.5 sm:p-3 rounded-xl border mb-3.5 sm:mb-5 ${f.bg}`}>
                     <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${f.color}`} />
                   </div>
                   <h3 className="text-base font-bold text-neutral-950 dark:text-white mb-2 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors">
@@ -192,6 +256,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Interactive Media Lightbox Modal */}
+      <ProjectMediaModal
+        project={activeMediaProject}
+        onClose={() => setActiveMediaProject(null)}
+      />
     </>
   );
 };

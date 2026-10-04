@@ -41,46 +41,46 @@ const Projects: React.FC = () => {
   }, [filtered]);
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
+    <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Header */}
-        <div className="mb-10 sm:mb-12">
+        <div className="mb-8 sm:mb-12">
           <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Project Portfolio</div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Engineering Project Showcase</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl text-base leading-relaxed">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-2 sm:mb-3 tracking-tight">Engineering Project Showcase</h1>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl text-sm sm:text-base leading-relaxed">
             A comprehensive record of solar PV installations, battery storage systems, IoT telemetry deployments,
             and embedded engineering projects.
           </p>
         </div>
 
         {/* Stats Banner */}
-        <div className="bg-neutral-50 dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-5 mb-8 sm:mb-10 flex flex-wrap gap-4 sm:gap-8 items-center justify-between sm:justify-start shadow-subtle transition-colors">
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700">
+        <div className="bg-neutral-50 dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-3.5 sm:p-5 mb-6 sm:mb-10 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-8 items-center shadow-subtle transition-colors">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-1.5 sm:p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 shrink-0">
               <Sun className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <div className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 font-medium">Filtered Capacity</div>
-              <div className="text-lg sm:text-xl font-black text-neutral-950 dark:text-white font-mono">
+              <div className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-400 font-medium">Filtered Capacity</div>
+              <div className="text-base sm:text-xl font-black text-neutral-950 dark:text-white font-mono tabular-nums">
                 {totalKWp >= 1000
                   ? `${(totalKWp / 1000).toFixed(2)} MWp`
                   : `${totalKWp.toFixed(1)} kWp`}
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-1.5 sm:p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 shrink-0">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <div className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 font-medium">Projects Shown</div>
-              <div className="text-lg sm:text-xl font-black text-neutral-950 dark:text-white font-mono">{filtered.length}</div>
+              <div className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-400 font-medium">Projects Shown</div>
+              <div className="text-base sm:text-xl font-black text-neutral-950 dark:text-white font-mono tabular-nums">{filtered.length}</div>
             </div>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
           {/* Search */}
           <div className="relative w-full sm:max-w-sm">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 dark:text-neutral-500" />
@@ -98,7 +98,7 @@ const Projects: React.FC = () => {
           </div>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-1.5 sm:gap-2" role="tablist" aria-label="Project category filter">
+          <div className="flex overflow-x-auto sm:flex-wrap gap-1.5 sm:gap-2 pb-1 sm:pb-0 no-scrollbar touch-pan-x" role="tablist" aria-label="Project category filter">
             {categories.map(cat => (
               <button
                 key={cat}
@@ -106,7 +106,7 @@ const Projects: React.FC = () => {
                 aria-selected={activeCategory === cat}
                 onClick={() => setActiveCategory(cat as Filter)}
                 id={`filter-${cat.replace(/[^a-zA-Z]/g, '-')}`}
-                className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold border transition-all duration-200 ${
+                className={`px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold border transition-all duration-200 shrink-0 cursor-pointer ${
                   activeCategory === cat
                     ? 'bg-neutral-950 text-white border-neutral-950 dark:bg-white dark:text-neutral-950 dark:border-white shadow-sm'
                     : 'bg-white dark:bg-[#0f172a] text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-[#334155] hover:text-neutral-950 dark:hover:text-[#090d16] hover:border-neutral-400 dark:hover:bg-white dark:hover:border-white active:bg-neutral-100 dark:active:bg-white dark:active:text-[#090d16] shadow-subtle'
@@ -126,7 +126,7 @@ const Projects: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
             >
               {filtered.map((project, i) => (
                 <ProjectCard

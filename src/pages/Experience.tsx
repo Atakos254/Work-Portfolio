@@ -13,13 +13,13 @@ const typeBadge: Record<EmploymentType, string> = {
 
 const Experience: React.FC = () => {
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
+    <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Header */}
-        <div className="mb-14 sm:mb-16">
+        <div className="mb-8 sm:mb-16">
           <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Career Timeline</div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Professional Experience</h1>
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl text-base leading-relaxed">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-2 sm:mb-3 tracking-tight">Professional Experience</h1>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl text-sm sm:text-base leading-relaxed">
             A progressive track record in solar PV engineering, industrial automation, IoT telemetry, and electrical engineering —
             from internship to senior site engineer on megawatt-scale projects.
           </p>
@@ -30,7 +30,7 @@ const Experience: React.FC = () => {
           {/* Vertical line (Center on desktop, left on mobile) */}
           <div className="absolute left-3 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-neutral-200 dark:bg-neutral-800" />
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {workExperience.map((exp, idx) => {
               const isLeft = idx % 2 === 0;
               return (
@@ -52,10 +52,10 @@ const Experience: React.FC = () => {
                   </div>
 
                   {/* 2-Column Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pl-7 sm:pl-10 lg:pl-0 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 pl-6 sm:pl-10 lg:pl-0 items-start">
                     {/* Left slot */}
                     {isLeft ? (
-                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
+                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-3.5 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                           <span className={typeBadge[exp.type]}>{exp.type}</span>
                           {exp.period.includes('Present') && (
@@ -94,7 +94,7 @@ const Experience: React.FC = () => {
 
                     {/* Right slot */}
                     {!isLeft ? (
-                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
+                      <div className="bg-white dark:bg-[#0e1422] border border-neutral-200 dark:border-neutral-800 rounded-2xl p-3.5 sm:p-7 shadow-sm hover:shadow-card-hover hover:border-neutral-900 dark:hover:border-neutral-500 transition-all duration-300">
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                           <span className={typeBadge[exp.type]}>{exp.type}</span>
                           {exp.period.includes('Present') && (

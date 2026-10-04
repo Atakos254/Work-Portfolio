@@ -32,11 +32,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
     clean = clean.replace(/Station Power Coupling Subsystem/i, 'Power Coupling');
     clean = clean.replace(/AC & DC EV Fast-Charger Coupling/i, 'AC & DC Fast Chargers');
     clean = clean.replace(/Bidirectional MQTT Cloud Telemetry & NVS/i, 'MQTT Telemetry');
+    clean = clean.replace(/Demand Profiling & Logging/i, 'Demand Profiling');
+    clean = clean.replace(/Capacity Sizing Models/i, 'Capacity Sizing');
+    clean = clean.replace(/Phase Balancing & Harmonics/i, 'Phase Balancing');
     clean = clean.replace(/\s+Battery$/i, '');
     return clean;
   };
 
-  const specs = isIot
+  const isPowerAnalysis = project.id === 'power-analysis-dynamic-load-calculations';
+
+  const specs = isPowerAnalysis
+    ? [
+        { label: 'Profiling', icon: Activity, brief: formatBriefSpec(project.pvArray),          fullText: project.pvArray },
+        { label: 'Sizing',    icon: Zap,      brief: formatBriefSpec(project.inverterCapacity), fullText: project.inverterCapacity },
+        { label: 'Quality',   icon: Cpu,      brief: formatBriefSpec(project.batteryStorage),   fullText: project.batteryStorage },
+      ]
+    : isIot
     ? [
         { label: 'System',    icon: Activity, brief: formatBriefSpec(project.pvArray),          fullText: project.pvArray },
         { label: 'Hardware',  icon: Cpu,      brief: formatBriefSpec(project.inverterCapacity), fullText: project.inverterCapacity },
@@ -121,13 +132,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
                 'inline-flex items-center gap-1.5 text-[11px] px-2.5 py-0.5 rounded-full font-medium shrink-0',
                 project.status === 'Completed'
                   ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
+                  : project.status === 'Continuous'
+                  ? 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60'
                   : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60'
               )}
             >
               <span
                 className={clsx(
                   'w-1.5 h-1.5 rounded-full',
-                  project.status === 'Completed' ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'
+                  project.status === 'Completed'
+                    ? 'bg-emerald-500'
+                    : project.status === 'Continuous'
+                    ? 'bg-cyan-500 animate-pulse'
+                    : 'bg-amber-500 animate-pulse'
                 )}
               />
               {project.status}

@@ -127,12 +127,12 @@ const Contact: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 bg-white dark:bg-[#090d16] transition-colors">
+    <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
         {/* Header */}
-        <div className="mb-10 sm:mb-14">
+        <div className="mb-8 sm:mb-14">
           <div className="text-xs font-bold tracking-widest text-neutral-500 dark:text-neutral-400 uppercase mb-2">Get In Touch</div>
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-3 tracking-tight">Let’s Build Something Efficient</h1>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-neutral-950 dark:text-white mb-2 sm:mb-3 tracking-tight">Let’s Build Something Efficient</h1>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-xl text-sm sm:text-base leading-relaxed">
             Open to select consulting engagements, system deployments and forward-looking engineering roles across East Africa &amp; the World.
           </p>
