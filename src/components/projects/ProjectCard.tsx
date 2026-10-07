@@ -4,6 +4,7 @@ import {
   Sun, Battery, MapPin, FileText, Activity, Calendar, Zap, Cpu,
   Camera, Film
 } from 'lucide-react';
+import { GithubIcon } from '../common/GithubIcon';
 import { ProjectItem } from '../../data/projects';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
@@ -215,7 +216,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
             )}
           </div>
 
-          {/* Action CTAs: Balanced Twin Buttons */}
+          {/* Action CTAs: Balanced Twin Buttons + Optional GitHub Link */}
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -238,6 +239,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
               <FileText className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/specs-btn:text-white dark:group-hover/specs-btn:text-[#090d16] group-active/specs-btn:text-white dark:group-active/specs-btn:text-[#090d16] transition-colors" />
               <span>View Specs</span>
             </Link>
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                title="View GitHub Repository"
+                aria-label={`View ${project.title} on GitHub`}
+                className="btn-secondary h-9 w-9 p-0 flex items-center justify-center shrink-0 text-neutral-600 dark:text-neutral-300 hover:text-white dark:hover:text-[#090d16] hover:bg-neutral-900 dark:hover:bg-white transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" />
+              </a>
+            )}
           </div>
         </div>
       </div>

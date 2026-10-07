@@ -5,6 +5,7 @@ import {
   CheckCircle2, ChevronLeft, ChevronRight, Activity, Cpu, Award,
   AlertTriangle, Target, Lightbulb, Camera, Film, Play, Maximize2,
 } from 'lucide-react';
+import { GithubIcon } from '../components/common/GithubIcon';
 import { projectsData } from '../data/projects';
 import { ProjectMediaModal } from '../components/projects/ProjectMediaModal';
 import { motion } from 'framer-motion';
@@ -119,6 +120,18 @@ const ProjectDetail: React.FC = () => {
             <span className="flex items-center gap-1.5">
               <Calendar size={15} className="text-neutral-500 dark:text-neutral-400" /> {project.period}
             </span>
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 font-semibold transition-colors"
+                aria-label="View source repository on GitHub"
+              >
+                <GithubIcon className="w-4 h-4 shrink-0" />
+                <span>GitHub Repository</span>
+              </a>
+            )}
           </div>
         </motion.div>
 
@@ -363,7 +376,19 @@ const ProjectDetail: React.FC = () => {
                 })}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="mt-6 pt-5 border-t border-neutral-100 dark:border-neutral-800 space-y-2.5">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full justify-center text-sm gap-2"
+                    aria-label="View source repository on GitHub"
+                  >
+                    <GithubIcon className="w-4 h-4 shrink-0" />
+                    <span>View GitHub Repository</span>
+                  </a>
+                )}
                 <Link
                   to="/contact"
                   className="btn-primary w-full justify-center text-sm"
