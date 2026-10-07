@@ -1121,8 +1121,39 @@ export const projectsData: ProjectItem[] = [
       'Simulated and validated under Wokwi hardware-in-the-loop virtual environment',
     ],
     imagePlaceholder: '/images/projects/ev-chargepoint.jpg',
-    coverImage: '/media/projects/esp32-ev-chargepoint-reporter/cover.jpg',
+    coverImage: '/media/projects/esp32-ev-chargepoint-reporter/cover.png',
     githubUrl: 'https://github.com/Atakos254/ESP32_ChargePoint',
-    media: [],
+    media: [
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_charging.png',
+        title: 'Wokwi Simulation: Active EV Charging State',
+        caption: 'Hardware-in-the-loop simulation showing ESP32 receiving remote MQTT START_CHARGE command, transitioning FSM from IDLE to CHARGING, driving green telemetry LED, and streaming live 236.7V / 8.11A metrics.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_idle.png',
+        title: 'Wokwi Simulation: Standby & Ready State',
+        caption: 'ESP32 charge-point in ready-to-charge standby state, maintaining keepalive heartbeats and listening on MQTT subscription topic chaji/charger/CHJ-ESP32-001/cmd.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_stop_charge.png',
+        title: 'Wokwi Simulation: Stop Charge Transition',
+        caption: 'Graceful termination sequence upon receiving STOP_CHARGE payload, disengaging charging contactor logic and returning system safely to IDLE.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_fault.png',
+        title: 'Wokwi Simulation: Electrical Fault Detection',
+        caption: 'Electrical anomaly and contactor fault condition triggering non-blocking FreeRTOS error handling, driving red indicator LED, and broadcasting high-priority MQTT alert.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_reset_fault.png',
+        title: 'Wokwi Simulation: Remote Fault Recovery & Reset',
+        caption: 'Remote supervisor cloud command RESET_FAULT clearing alert state, verifying safety interlocks, and restoring controller to normal standby operation.',
+      },
+    ],
   },
 ];
