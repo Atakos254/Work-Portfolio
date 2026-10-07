@@ -1090,7 +1090,7 @@ export const projectsData: ProjectItem[] = [
     dcArchitecture: 'Noise-isolated PCB layout guard-banded against 230V AC / high-power DC switching noise',
     batteryStorage: 'Bidirectional MQTT Cloud Telemetry & NVS',
     status: 'Completed',
-    employerContractor: 'Voltifix Infrastructure / Independent R&D',
+    employerContractor: 'Independent R&D',
     technologies: [
       'ESP32',
       'FreeRTOS',
