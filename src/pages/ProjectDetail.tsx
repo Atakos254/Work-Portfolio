@@ -4,7 +4,9 @@ import {
   Layers, Sun, Battery, Zap, MapPin, Calendar, Building2,
   CheckCircle2, ChevronLeft, ChevronRight, Activity, Cpu, Award,
   AlertTriangle, Target, Lightbulb, Camera, Film, Play, Maximize2,
+  FileText,
 } from 'lucide-react';
+import { GithubIcon } from '../components/common/GithubIcon';
 import { projectsData } from '../data/projects';
 import { ProjectMediaModal } from '../components/projects/ProjectMediaModal';
 import { motion } from 'framer-motion';
@@ -119,6 +121,30 @@ const ProjectDetail: React.FC = () => {
             <span className="flex items-center gap-1.5">
               <Calendar size={15} className="text-neutral-500 dark:text-neutral-400" /> {project.period}
             </span>
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 font-semibold transition-colors"
+                aria-label="View source repository on GitHub"
+              >
+                <GithubIcon className="w-4 h-4 shrink-0" />
+                <span>GitHub Repository</span>
+              </a>
+            )}
+            {project.schematicUrl && (
+              <a
+                href={project.schematicUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 font-semibold transition-colors"
+                aria-label="View hardware circuit schematic PDF"
+              >
+                <FileText size={15} />
+                <span>Schematic (PDF)</span>
+              </a>
+            )}
           </div>
         </motion.div>
 
@@ -219,6 +245,11 @@ const ProjectDetail: React.FC = () => {
                             muted
                             playsInline
                             className="w-full h-full object-cover pointer-events-none opacity-80 group-hover/item:opacity-100 group-hover/item:scale-105 transition-all duration-300"
+                            onError={e => {
+                              e.currentTarget.style.display = 'none';
+                              const fb = e.currentTarget.closest('.group\\/item')?.querySelector('.detail-media-fallback');
+                              if (fb) fb.classList.remove('hidden');
+                            }}
                           />
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="w-10 h-10 rounded-full bg-neutral-950/85 border border-white/25 flex items-center justify-center text-white backdrop-blur-sm shadow-xl group-hover/item:scale-110 transition-transform">
@@ -358,7 +389,31 @@ const ProjectDetail: React.FC = () => {
                 })}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="mt-6 pt-5 border-t border-neutral-100 dark:border-neutral-800 space-y-2.5">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full justify-center text-sm gap-2"
+                    aria-label="View source repository on GitHub"
+                  >
+                    <GithubIcon className="w-4 h-4 shrink-0" />
+                    <span>View GitHub Repository</span>
+                  </a>
+                )}
+                {project.schematicUrl && (
+                  <a
+                    href={project.schematicUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full justify-center text-sm gap-2"
+                    aria-label="View hardware circuit schematic PDF"
+                  >
+                    <FileText className="w-4 h-4 shrink-0 text-blue-500" />
+                    <span>View Circuit Schematic (PDF)</span>
+                  </a>
+                )}
                 <Link
                   to="/contact"
                   className="btn-primary w-full justify-center text-sm"

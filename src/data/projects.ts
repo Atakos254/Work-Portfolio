@@ -41,6 +41,8 @@ export interface ProjectItem {
   imagePlaceholder: string;
   coverImage?: string;
   coverImagePosition?: string;
+  githubUrl?: string;
+  schematicUrl?: string;
   media?: ProjectMedia[];
 }
 
@@ -214,7 +216,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/mushroom-motors-hybrid/Panel & Structure Design.mp4',
+        url: '/media/projects/mushroom-motors-hybrid/panel-structure-design.mp4',
         title: 'Carport Structural CAD Flythrough',
         caption: '3D architectural engineering animation detailing carport truss geometry, vehicle clearances, and PV layouts.',
       },
@@ -292,13 +294,13 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/prof-jacob-bifacial-carport/Carport Outcome View.mp4',
+        url: '/media/projects/prof-jacob-bifacial-carport/carport-outcome-view.mp4',
         title: 'Completed Installation Walkaround',
         caption: 'Video footage of the energized carport microgrid, showing finished structural finish and driveway integration.',
       },
       {
         type: 'video',
-        url: '/media/projects/prof-jacob-bifacial-carport/Carport Design.mp4',
+        url: '/media/projects/prof-jacob-bifacial-carport/carport-design.mp4',
         title: 'Carport 3D Structural Model',
         caption: 'Engineering CAD 3D walkthrough modeling load stresses, module clearances, and shading angles.',
       },
@@ -532,7 +534,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/mombasa-3phase-residential/Panel Design.mp4',
+        url: '/media/projects/mombasa-3phase-residential/panel-design.mp4',
         title: '3D Rooftop Array Simulation',
         caption: '3D structural CAD animation and solar layout simulation for the residential flat roof installation.',
       },
@@ -1088,7 +1090,7 @@ export const projectsData: ProjectItem[] = [
     dcArchitecture: 'Noise-isolated PCB layout guard-banded against 230V AC / high-power DC switching noise',
     batteryStorage: 'Bidirectional MQTT Cloud Telemetry & NVS',
     status: 'Completed',
-    employerContractor: 'Voltifix Infrastructure / Independent R&D',
+    employerContractor: 'Independent R&D',
     technologies: [
       'ESP32',
       'FreeRTOS',
@@ -1120,7 +1122,40 @@ export const projectsData: ProjectItem[] = [
       'Simulated and validated under Wokwi hardware-in-the-loop virtual environment',
     ],
     imagePlaceholder: '/images/projects/ev-chargepoint.jpg',
-    coverImage: '/media/projects/esp32-ev-chargepoint-reporter/cover.jpg',
-    media: [],
+    coverImage: '/media/projects/esp32-ev-chargepoint-reporter/cover.png',
+    githubUrl: 'https://github.com/Atakos254/ESP32_ChargePoint',
+    schematicUrl: '/media/projects/esp32-ev-chargepoint-reporter/esp32-chargepoint-schematic.pdf',
+    media: [
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_charging.png',
+        title: 'Wokwi Simulation: Active EV Charging State',
+        caption: 'Hardware-in-the-loop simulation showing ESP32 receiving remote MQTT START_CHARGE command, transitioning FSM from IDLE to CHARGING, driving green telemetry LED, and streaming live 236.7V / 8.11A metrics.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_idle.png',
+        title: 'Wokwi Simulation: Standby & Ready State',
+        caption: 'ESP32 charge-point in ready-to-charge standby state, maintaining keepalive heartbeats and listening on MQTT subscription topic chaji/charger/CHJ-ESP32-001/cmd.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_stop_charge.png',
+        title: 'Wokwi Simulation: Stop Charge Transition',
+        caption: 'Graceful termination sequence upon receiving STOP_CHARGE payload, disengaging charging contactor logic and returning system safely to IDLE.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_fault.png',
+        title: 'Wokwi Simulation: Electrical Fault Detection',
+        caption: 'Electrical anomaly and contactor fault condition triggering non-blocking FreeRTOS error handling, driving red indicator LED, and broadcasting high-priority MQTT alert.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/esp32-ev-chargepoint-reporter/wokwi_reset_fault.png',
+        title: 'Wokwi Simulation: Remote Fault Recovery & Reset',
+        caption: 'Remote supervisor cloud command RESET_FAULT clearing alert state, verifying safety interlocks, and restoring controller to normal standby operation.',
+      },
+    ],
   },
 ];
