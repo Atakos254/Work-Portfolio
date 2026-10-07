@@ -42,6 +42,7 @@ export interface ProjectItem {
   coverImage?: string;
   coverImagePosition?: string;
   githubUrl?: string;
+  schematicUrl?: string;
   media?: ProjectMedia[];
 }
 
@@ -1123,6 +1124,7 @@ export const projectsData: ProjectItem[] = [
     imagePlaceholder: '/images/projects/ev-chargepoint.jpg',
     coverImage: '/media/projects/esp32-ev-chargepoint-reporter/cover.png',
     githubUrl: 'https://github.com/Atakos254/ESP32_ChargePoint',
+    schematicUrl: '/media/projects/esp32-ev-chargepoint-reporter/esp32-chargepoint-schematic.pdf',
     media: [
       {
         type: 'image',

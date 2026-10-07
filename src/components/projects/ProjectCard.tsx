@@ -239,6 +239,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
               <FileText className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/specs-btn:text-white dark:group-hover/specs-btn:text-[#090d16] group-active/specs-btn:text-white dark:group-active/specs-btn:text-[#090d16] transition-colors" />
               <span>View Specs</span>
             </Link>
+            {project.schematicUrl && (
+              <a
+                href={project.schematicUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                title="View Hardware Circuit Schematic (PDF)"
+                aria-label={`View ${project.title} circuit schematic`}
+                className="btn-secondary h-9 w-9 p-0 flex items-center justify-center shrink-0 text-neutral-600 dark:text-neutral-300 hover:text-white dark:hover:text-[#090d16] hover:bg-neutral-900 dark:hover:bg-white transition-colors"
+              >
+                <FileText className="w-4 h-4 text-blue-500" />
+              </a>
+            )}
             {project.githubUrl && (
               <a
                 href={project.githubUrl}

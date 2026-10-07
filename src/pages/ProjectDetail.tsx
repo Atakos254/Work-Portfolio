@@ -4,6 +4,7 @@ import {
   Layers, Sun, Battery, Zap, MapPin, Calendar, Building2,
   CheckCircle2, ChevronLeft, ChevronRight, Activity, Cpu, Award,
   AlertTriangle, Target, Lightbulb, Camera, Film, Play, Maximize2,
+  FileText,
 } from 'lucide-react';
 import { GithubIcon } from '../components/common/GithubIcon';
 import { projectsData } from '../data/projects';
@@ -130,6 +131,18 @@ const ProjectDetail: React.FC = () => {
               >
                 <GithubIcon className="w-4 h-4 shrink-0" />
                 <span>GitHub Repository</span>
+              </a>
+            )}
+            {project.schematicUrl && (
+              <a
+                href={project.schematicUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 font-semibold transition-colors"
+                aria-label="View hardware circuit schematic PDF"
+              >
+                <FileText size={15} />
+                <span>Schematic (PDF)</span>
               </a>
             )}
           </div>
@@ -387,6 +400,18 @@ const ProjectDetail: React.FC = () => {
                   >
                     <GithubIcon className="w-4 h-4 shrink-0" />
                     <span>View GitHub Repository</span>
+                  </a>
+                )}
+                {project.schematicUrl && (
+                  <a
+                    href={project.schematicUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full justify-center text-sm gap-2"
+                    aria-label="View hardware circuit schematic PDF"
+                  >
+                    <FileText className="w-4 h-4 shrink-0 text-blue-500" />
+                    <span>View Circuit Schematic (PDF)</span>
                   </a>
                 )}
                 <Link
