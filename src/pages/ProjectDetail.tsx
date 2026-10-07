@@ -219,6 +219,11 @@ const ProjectDetail: React.FC = () => {
                             muted
                             playsInline
                             className="w-full h-full object-cover pointer-events-none opacity-80 group-hover/item:opacity-100 group-hover/item:scale-105 transition-all duration-300"
+                            onError={e => {
+                              e.currentTarget.style.display = 'none';
+                              const fb = e.currentTarget.closest('.group\\/item')?.querySelector('.detail-media-fallback');
+                              if (fb) fb.classList.remove('hidden');
+                            }}
                           />
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="w-10 h-10 rounded-full bg-neutral-950/85 border border-white/25 flex items-center justify-center text-white backdrop-blur-sm shadow-xl group-hover/item:scale-110 transition-transform">

@@ -125,17 +125,30 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
               <div className="relative w-full h-full flex items-center justify-center bg-black">
                 <video
                   key={currentMedia.url}
-                  src={encodeURI(currentMedia.url)}
                   controls
                   autoPlay
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="w-full h-full max-h-[48vh] sm:max-h-[60vh] object-contain"
+                  onError={e => {
+                    e.currentTarget.style.display = 'none';
+                    const fb = e.currentTarget.parentElement?.querySelector('.modal-video-fallback');
+                    if (fb) fb.classList.remove('hidden');
+                  }}
                 >
                   <source src={encodeURI(currentMedia.url)} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                <div className="modal-video-fallback hidden flex flex-col items-center justify-center p-6 sm:p-8 text-center text-neutral-400">
+                  <div className="p-3 sm:p-4 rounded-2xl bg-neutral-800/80 border border-neutral-700 mb-3 text-emerald-400">
+                    <Film className="w-8 h-8 sm:w-10 sm:h-10" />
+                  </div>
+                  <h4 className="text-sm sm:text-base font-bold text-white mb-1">{currentMedia.title}</h4>
+                  <p className="text-xs text-neutral-400 max-w-md">
+                    Unable to stream video: <code className="text-neutral-300 bg-neutral-800 px-1.5 py-0.5 rounded">{currentMedia.url}</code>
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="relative w-full h-full flex items-center justify-center">

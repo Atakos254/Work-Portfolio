@@ -214,7 +214,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/mushroom-motors-hybrid/Panel & Structure Design.mp4',
+        url: '/media/projects/mushroom-motors-hybrid/panel-structure-design.mp4',
         title: 'Carport Structural CAD Flythrough',
         caption: '3D architectural engineering animation detailing carport truss geometry, vehicle clearances, and PV layouts.',
       },
@@ -292,13 +292,13 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/prof-jacob-bifacial-carport/Carport Outcome View.mp4',
+        url: '/media/projects/prof-jacob-bifacial-carport/carport-outcome-view.mp4',
         title: 'Completed Installation Walkaround',
         caption: 'Video footage of the energized carport microgrid, showing finished structural finish and driveway integration.',
       },
       {
         type: 'video',
-        url: '/media/projects/prof-jacob-bifacial-carport/Carport Design.mp4',
+        url: '/media/projects/prof-jacob-bifacial-carport/carport-design.mp4',
         title: 'Carport 3D Structural Model',
         caption: 'Engineering CAD 3D walkthrough modeling load stresses, module clearances, and shading angles.',
       },
@@ -532,7 +532,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'video',
-        url: '/media/projects/mombasa-3phase-residential/Panel Design.mp4',
+        url: '/media/projects/mombasa-3phase-residential/panel-design.mp4',
         title: '3D Rooftop Array Simulation',
         caption: '3D structural CAD animation and solar layout simulation for the residential flat roof installation.',
       },
