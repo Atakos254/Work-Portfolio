@@ -27,6 +27,13 @@ const credentials = [
     bg: 'bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700',
   },
   {
+    title: 'Energy & Petroleum Regulatory Authority (EPRA)',
+    detail: 'Class T3 Solar PV License',
+    icon: Sun,
+    color: 'text-neutral-900 dark:text-white',
+    bg: 'bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700',
+  },
+  {
     title: 'JKUAT — B.Sc. Electrical & Electronics Engineering',
     detail: 'Jomo Kenyatta University of Agriculture & Technology',
     icon: GraduationCap,

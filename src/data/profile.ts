@@ -13,6 +13,7 @@ export interface ProfileData {
   registrations: {
     ebkRegistration: string;
     iekMembership: string;
+    epraLicense?: string;
   };
   education: {
     degree: string;
@@ -43,6 +44,7 @@ export const profileData: ProfileData = {
   registrations: {
     ebkRegistration: 'Graduate Engineer (B25236) — Engineers Board of Kenya',
     iekMembership: 'Graduate Engineer Member — Institution of Engineers of Kenya',
+    epraLicense: 'Class T3 Solar PV License — Energy and Petroleum Regulatory Authority (EPRA)',
   },
   education: {
     degree: 'B.Sc. Electrical & Electronics Engineering — JKUAT',
