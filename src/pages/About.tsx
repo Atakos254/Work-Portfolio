@@ -195,7 +195,7 @@ const About: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               <a
                 href="/docs/Emmanuel_Atakos_CV.pdf"
-                download
+                download="Emmanuel Atakos Electrical Engineer Resume.pdf"
                 aria-label="Download Emmanuel's CV / Resume PDF"
                 className="btn-primary w-full sm:w-auto"
               >

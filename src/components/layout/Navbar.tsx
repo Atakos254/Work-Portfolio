@@ -77,7 +77,7 @@ export const Navbar: React.FC = () => {
             <ThemeToggle />
             <a
               href="/docs/Emmanuel_Atakos_CV.pdf"
-              download="Emmanuel_Atakos_CV.pdf"
+              download="Emmanuel Atakos Electrical Engineer Resume.pdf"
               aria-label="Download Emmanuel's CV / Resume PDF"
               className="btn-secondary text-xs py-2 px-3.5"
             >
@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex gap-2 pt-3 border-t border-neutral-100 dark:border-neutral-800 mt-1">
                   <a
                     href="/docs/Emmanuel_Atakos_CV.pdf"
-                    download="Emmanuel_Atakos_CV.pdf"
+                    download="Emmanuel Atakos Electrical Engineer Resume.pdf"
                     onClick={() => setOpen(false)}
                     aria-label="Download Emmanuel's CV / Resume PDF"
                     className="btn-secondary flex-1 justify-center text-xs py-2.5"
