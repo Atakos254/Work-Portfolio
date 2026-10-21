@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { profileData } from '../data/profile';
 import { skillCategories } from '../data/skills';
 import {
-  Award, GraduationCap, ShieldCheck, Sun, Zap, Cpu, Download,
+  Award, GraduationCap, ShieldCheck, Sun, Zap, Cpu, Download, Loader2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
+import { downloadExperienceReport } from '../utils/generateExperienceReport';
 
 const iconMap: Record<string, React.ElementType> = {
   Sun, Zap, Cpu, ShieldCheck,
@@ -23,6 +24,13 @@ const credentials = [
     title: 'Institution of Engineers of Kenya (IEK)',
     detail: 'Graduate Engineer Member',
     icon: ShieldCheck,
+    color: 'text-neutral-900 dark:text-white',
+    bg: 'bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700',
+  },
+  {
+    title: 'Energy & Petroleum Regulatory Authority (EPRA)',
+    detail: 'Class T3 Solar PV License',
+    icon: Sun,
     color: 'text-neutral-900 dark:text-white',
     bg: 'bg-neutral-100 dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700',
   },
@@ -50,6 +58,20 @@ const credentials = [
 ];
 
 const About: React.FC = () => {
+  const [generatingReport, setGeneratingReport] = useState(false);
+
+  const handleDownloadReport = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setGeneratingReport(true);
+    try {
+      downloadExperienceReport();
+    } catch (err) {
+      console.error('Dynamic PDF generation error:', err);
+      window.location.href = '/docs/Emmanuel_Atakos_Project_Experience_Report.pdf';
+    } finally {
+      setGeneratingReport(false);
+    }
+  };
   return (
     <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
@@ -188,7 +210,7 @@ const About: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               <a
                 href="/docs/Emmanuel_Atakos_CV.pdf"
-                download
+                download="Emmanuel Atakos Electrical Engineer Resume.pdf"
                 aria-label="Download Emmanuel's CV / Resume PDF"
                 className="btn-primary w-full sm:w-auto"
               >
@@ -197,12 +219,22 @@ const About: React.FC = () => {
               </a>
               <a
                 href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
-                download
+                download="Emmanuel_Atakos_Project_Experience_Report.pdf"
+                onClick={handleDownloadReport}
                 aria-label="Download Solar PV Project Experience Report PDF"
-                className="btn-secondary w-full sm:w-auto"
+                className="btn-secondary w-full sm:w-auto cursor-pointer"
               >
-                <Download size={15} />
-                <span>Project Experience Report</span>
+                {generatingReport ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin text-neutral-500 dark:text-neutral-300" />
+                    <span>Generating…</span>
+                  </>
+                ) : (
+                  <>
+                    <Download size={15} />
+                    <span>Project Experience Report</span>
+                  </>
+                )}
               </a>
 
               {profileData.contact.linkedin && (
@@ -214,7 +246,7 @@ const About: React.FC = () => {
                   className="btn-secondary text-sm group flex-1 sm:flex-initial justify-center"
                 >
                   <svg className="w-4 h-4 fill-neutral-900 dark:fill-neutral-200 group-hover:fill-white dark:group-hover:fill-[#090d16] group-active:fill-white dark:group-active:fill-[#090d16] transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
                   </svg>
                   <span>LinkedIn</span>
                 </a>
@@ -228,7 +260,7 @@ const About: React.FC = () => {
                   className="btn-secondary text-sm group flex-1 sm:flex-initial justify-center"
                 >
                   <svg className="w-4 h-4 fill-neutral-900 dark:fill-neutral-200 group-hover:fill-white dark:group-hover:fill-[#090d16] group-active:fill-white dark:group-active:fill-[#090d16] transition-colors shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                   </svg>
                   <span>GitHub</span>
                 </a>

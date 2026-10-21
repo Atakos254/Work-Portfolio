@@ -82,12 +82,12 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-5xl bg-neutral-900 border border-neutral-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[92vh]"
+          className="relative w-full max-w-5xl bg-neutral-900 border border-neutral-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[90vh]"
           onClick={e => e.stopPropagation()}
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-3 sm:px-5 py-2.5 sm:py-4 border-b border-neutral-800 bg-neutral-900/90 text-white">
-            <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-4 truncate">
+          <div className="flex items-center justify-between px-3 sm:px-5 py-2.5 sm:py-3.5 border-b border-neutral-800 bg-neutral-900/90 text-white shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-4 truncate min-w-0">
               <span className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300 font-semibold shrink-0">
                 {project.category}
               </span>
@@ -99,11 +99,12 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
               <Link
                 to={`/projects/${project.id}`}
                 onClick={onClose}
+                aria-label={`View full case study for ${project.title}`}
                 className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#0f172a] hover:bg-white text-[#f8fafc] hover:text-[#090d16] active:bg-white active:text-[#090d16] border border-[#334155] hover:border-white text-[11px] sm:text-xs font-semibold transition-all shadow-sm cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5 shrink-0" />
-                <span className="hidden xs:inline">Full Case Study</span>
-                <span className="xs:hidden">Specs</span>
+                <span className="hidden sm:inline">Full Case Study</span>
+                <span className="sm:hidden">Specs</span>
               </Link>
               <button
                 onClick={onClose}
@@ -119,10 +120,10 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
           <div
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className="relative flex-1 bg-black flex items-center justify-center min-h-[220px] sm:min-h-[400px] max-h-[48vh] sm:max-h-[62vh] overflow-hidden group select-none"
+            className="relative flex-1 min-h-[200px] sm:min-h-0 max-h-[calc(90vh-140px)] bg-black flex items-center justify-center overflow-hidden group select-none"
           >
             {currentMedia.type === 'video' ? (
-              <div className="relative w-full h-full flex items-center justify-center bg-black">
+              <div className="relative w-full h-full flex items-center justify-center bg-black p-2 sm:p-4">
                 <video
                   key={currentMedia.url}
                   controls
@@ -130,7 +131,7 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                   muted
                   playsInline
                   preload="metadata"
-                  className="w-full h-full max-h-[48vh] sm:max-h-[60vh] object-contain"
+                  className="max-w-full max-h-[calc(90vh-160px)] w-auto h-auto object-contain"
                   onError={e => {
                     e.currentTarget.style.display = 'none';
                     const fb = e.currentTarget.parentElement?.querySelector('.modal-video-fallback');
@@ -151,12 +152,12 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="relative w-full h-full flex items-center justify-center">
+              <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-4">
                 <img
                   key={currentMedia.url}
                   src={encodeURI(currentMedia.url)}
                   alt={currentMedia.title}
-                  className="w-full h-full max-h-[48vh] sm:max-h-[60vh] object-contain pointer-events-none"
+                  className="max-w-full max-h-[calc(90vh-160px)] w-auto h-auto object-contain pointer-events-none"
                   onError={e => {
                     e.currentTarget.style.display = 'none';
                     const fb = e.currentTarget.parentElement?.querySelector('.modal-fallback');
@@ -221,18 +222,18 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
           </div>
 
           {/* Caption & Navigation Drawer */}
-          <div className="p-3 sm:p-5 bg-neutral-900 border-t border-neutral-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
-            <div className="flex-1 pr-1 sm:pr-2">
-              <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5">{currentMedia.title}</h4>
+          <div className="p-3 sm:px-5 sm:py-3.5 bg-neutral-900 border-t border-neutral-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4 shrink-0">
+            <div className="flex-1 min-w-0 pr-1 sm:pr-2">
+              <h4 className="text-xs sm:text-sm font-bold text-white mb-0.5 truncate">{currentMedia.title}</h4>
               {currentMedia.caption && (
-                <p className="text-[11px] sm:text-xs text-neutral-400 leading-relaxed line-clamp-2 sm:line-clamp-none">{currentMedia.caption}</p>
+                <p className="text-[11px] sm:text-xs text-neutral-400 leading-relaxed line-clamp-2">{currentMedia.caption}</p>
               )}
             </div>
 
             {/* Thumbnail selector */}
             {mediaList.length > 1 && (
               <div
-                className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto max-w-full py-1 px-0.5 shrink-0 no-scrollbar touch-pan-x"
+                className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto max-w-full w-full sm:w-auto py-1 px-0.5 shrink-0 no-scrollbar touch-pan-x"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
               >
                 {mediaList.map((m, idx) => (
@@ -240,7 +241,7 @@ export const ProjectMediaModal: React.FC<ProjectMediaModalProps> = ({
                     key={idx}
                     onClick={() => setActiveIndex(idx)}
                     aria-label={`View media ${idx + 1}: ${m.title}`}
-                    className={`relative w-12 h-8 sm:w-14 sm:h-10 rounded-lg overflow-hidden border transition-all shrink-0 cursor-pointer ${
+                    className={`relative w-12 h-8 sm:w-14 sm:h-9 rounded-lg overflow-hidden border transition-all shrink-0 cursor-pointer ${
                       activeIndex === idx
                         ? 'border-emerald-400 ring-2 ring-emerald-500/40 scale-105 opacity-100 shadow-md'
                         : 'border-neutral-700/80 opacity-60 hover:opacity-100 hover:border-neutral-500'

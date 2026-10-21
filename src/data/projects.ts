@@ -120,7 +120,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/tatu-city-link-grid-tied/Panel Washing Tank & Pump.jpg',
+        url: '/media/projects/tatu-city-link-grid-tied/Panel Washing Tank and Pump.jpg',
         title: 'Array Washing Reservoir & Pump Station',
         caption: 'Dedicated high-capacity water storage and pressure pumping system engineered for regular solar module soiling maintenance.',
       },
@@ -288,7 +288,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/prof-jacob-bifacial-carport/Growatt Inverter & Batteries.jpg',
+        url: '/media/projects/prof-jacob-bifacial-carport/Growatt Inverter and Batteries.jpg',
         title: '15 kW Growatt Inverter & 32 kWh BESS',
         caption: 'Wall-mounted 15 kW Growatt hybrid inverter, DC isolators, and two 16 kWh LiFePO4 battery units.',
       },
@@ -362,7 +362,7 @@ export const projectsData: ProjectItem[] = [
       'High-density 710 W bifacial dual-glass modules harvesting ground albedo reflection',
     ],
     imagePlaceholder: '/images/projects/runda-carport.jpg',
-    coverImage: '/media/projects/runda-bifacial-carport/Panel & Carport Aerial view.jpg',
+    coverImage: '/media/projects/runda-bifacial-carport/Panel and Carport Aerial view.jpg',
     media: [
       {
         type: 'image',
@@ -372,7 +372,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/runda-bifacial-carport/Panel & Carport Aerial view.jpg',
+        url: '/media/projects/runda-bifacial-carport/Panel and Carport Aerial view.jpg',
         title: 'Carport Drone Aerial View',
         caption: 'High-angle aerial capture of dual-glass bifacial panels harvesting overhead and reflected ground albedo.',
       },
@@ -462,7 +462,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/kiambu-water-treatment/Growatt Inverters & Batteries.jpg',
+        url: '/media/projects/kiambu-water-treatment/Growatt Inverters and Batteries.jpg',
         title: '45 kW Growatt Inverters & 48 kWh BESS',
         caption: 'Three 15 kW Growatt hybrid inverters in 3-phase parallel with DC combiner boxes and three 16 kWh stacked LiFePO4 batteries.',
       },
@@ -528,7 +528,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/mombasa-3phase-residential/Inverter & Batteries.jpg',
+        url: '/media/projects/mombasa-3phase-residential/Inverter and Batteries.jpg',
         title: '3-Phase Inverter Bank & 30 kWh Battery Cabinets',
         caption: 'Three 6 kW Jua Power inverters synchronized across 3 phases, with three 10 kWh LiFePO4 battery cabinets in secure enclosure.',
       },
@@ -541,7 +541,7 @@ export const projectsData: ProjectItem[] = [
     ],
   },
   {
-    id: 'catherine-garden-city-residence',
+    id: 'carol-daykio-residence',
     title: 'Carol Daykio Residence Hybrid Solar & Storage',
     client: 'Carol Daykio Residence',
     category: 'Residential Hybrid',
@@ -583,38 +583,105 @@ export const projectsData: ProjectItem[] = [
       'Eliminates household power shortages during grid disturbances via 16 kWh LiFePO4 battery storage',
       'Specialized residential tile roof flashing preventing water ingress',
     ],
-    imagePlaceholder: '/images/projects/catherine-residence.jpg',
-    coverImage: '/media/projects/catherine-garden-city-residence/Panel Rooftop aerial view.jpg',
+    imagePlaceholder: '/images/projects/daykio-residence.jpg',
+    coverImage: '/media/projects/carol-daykio-residence/Front View of Panels mounted.png',
     media: [
       {
         type: 'image',
-        url: '/media/projects/catherine-garden-city-residence/Panel Rooftop aerial view.jpg',
-        title: 'Tile-Roof Solar Array Aerial View',
-        caption: 'High-angle perspective of monocrystalline solar modules mounted on residential pitched roof tiles.',
+        url: '/media/projects/carol-daykio-residence/Front View of Panels mounted.png',
+        title: 'Rooftop Solar Array Front View',
+        caption: 'Front perspective of monocrystalline solar modules mounted on residential pitched roof tiles.',
       },
       {
         type: 'image',
-        url: '/media/projects/catherine-garden-city-residence/12kW inverter and  Batteries.jpg',
+        url: '/media/projects/carol-daykio-residence/12kW inverter and  Batteries.jpg',
         title: '12 kW Hybrid Inverter & Battery Bank',
         caption: '12 kW wall-mounted hybrid inverter with integrated DC isolators and dual lithium battery connections.',
       },
       {
         type: 'image',
-        url: '/media/projects/catherine-garden-city-residence/2 standalone batteries.jpg',
+        url: '/media/projects/carol-daykio-residence/2 standalone batteries.jpg',
         title: 'Dual Standalone Lithium Batteries',
         caption: 'Two high-capacity standalone LiFePO4 battery modules providing residential backup power.',
       },
       {
         type: 'image',
-        url: '/media/projects/catherine-garden-city-residence/Panel Rooftop Side view.jpg',
+        url: '/media/projects/carol-daykio-residence/Panel Rooftop Side view.jpg',
         title: 'Rooftop Array Side Elevation',
         caption: 'Side profile showing non-penetrating tile-roof bracket mounting and weather-tight flashing.',
       },
       {
         type: 'image',
-        url: '/media/projects/catherine-garden-city-residence/Panel Rooftop Design.jpg',
+        url: '/media/projects/carol-daykio-residence/Panel Rooftop Design.jpg',
         title: 'Rooftop Solar Layout Engineering CAD',
         caption: 'Structural layout schematic showing string orientation, spacing, and roof truss alignment.',
+      },
+    ],
+  },
+  {
+    id: 'mrs-catherine-garden-city',
+    title: 'Mrs. Catherine Garden City Residence Hybrid Solar & Storage',
+    client: 'Mrs. Catherine',
+    category: 'Residential Hybrid',
+    location: 'Garden City, Nairobi, Kenya',
+    period: 'October 2026',
+    pvArray: '7.28 kWp DC (16 × 455 W High-Efficiency Monocrystalline Panels)',
+    inverterCapacity: '12 kW AC (1 × 12 kW Jua Power Hybrid Inverter)',
+    inverterBrand: 'Jua Power',
+    dcArchitecture: 'Residential rooftop rail mounting with integrated DC isolators, SPD protection and battery BMS link',
+    batteryStorage: '16 kWh LiFePO4 (1 × 16 kWh Battery Module)',
+    status: 'Completed',
+    employerContractor: 'Voltifix New Energy SEZ Limited',
+    technologies: [
+      'Jua Power 12 kW Inverter',
+      '16 kWh LiFePO4 Battery',
+      'Rooftop Rail Mounting',
+      'DC Isolators & SPDs',
+      'Smart Energy Management',
+      'Wi-Fi Mobile Telemetry',
+    ],
+    summary:
+      'Engineered a 7.28 kWp residential hybrid solar PV and 16 kWh LiFePO4 battery installation for Mrs. Catherine in Garden City, Nairobi. Designed to substantially reduce grid electricity expenditure and ensure seamless domestic power continuity during urban utility outages.',
+    narrative: {
+      challenge:
+        'High utility electricity bills and frequent urban power outages in Garden City disrupted household operations, requiring a reliable, high-capacity hybrid solar and battery storage system with zero-delay failover.',
+      solution:
+        'Installed a 7.28 kWp rooftop array consisting of 16 high-efficiency 455 W monocrystalline panels, coupled to a 12 kW Jua Power hybrid inverter and a high-capacity 16 kWh LiFePO4 battery with integrated BMS communication and automated transfer switching.',
+      impact:
+        'Dramatically cut grid power reliance, delivering reliable 24/7 electricity with instant automatic backup during grid outages, while providing real-time mobile app tracking of household energy consumption and solar yield.',
+    },
+    responsibilities: [
+      'Designed string layout and installed weatherproof rooftop mounting rails for 16 × 455 W solar panels.',
+      'Mounted and commissioned the 12 kW Jua Power hybrid inverter and integrated AC/DC distribution boards.',
+      'Terminated and configured the 16 kWh LiFePO4 battery with dedicated high-speed DC circuit breakers and BMS communication.',
+      'Set up Wi-Fi telemetry dongle and trained client on mobile app solar monitoring and battery status tracking.',
+    ],
+    keyHighlights: [
+      '7.28 kWp rooftop solar PV generation significantly slashes monthly utility grid electricity expenses',
+      '16 kWh LiFePO4 battery storage provides seamless backup power during grid blackouts',
+      '12 kW Jua Power hybrid inverter supports full domestic inductive loads and appliance spikes',
+      'Real-time mobile telemetry for remote system monitoring, energy yield, and battery State of Charge (SOC)',
+    ],
+    imagePlaceholder: '/images/projects/catherine-residence.jpg',
+    coverImage: '/media/projects/mrs-catherine-garden-city/Mounted Panels View.png',
+    media: [
+      {
+        type: 'image',
+        url: '/media/projects/mrs-catherine-garden-city/Mounted Panels View.png',
+        title: 'Mounted Rooftop Solar Panels View',
+        caption: '16 high-efficiency 455 W monocrystalline solar modules installed across the residential roof at Garden City, Nairobi.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/mrs-catherine-garden-city/Front View of Panel Structure Design.png',
+        title: 'Panel Mounting Structure Engineering Drawing (Front Elevation)',
+        caption: 'Structural engineering CAD schematic showing panel tilt angle, rail mounting spacing, and roof fixing points.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/mrs-catherine-garden-city/Top View of Panels Design.png',
+        title: 'Solar PV Array Layout Plan (Top View)',
+        caption: 'Detailed 2D CAD layout showing module placement, roof area utilization, and string orientation.',
       },
     ],
   },
@@ -732,7 +799,7 @@ export const projectsData: ProjectItem[] = [
       },
       {
         type: 'image',
-        url: '/media/projects/mariakani-residential-hybrid/Inverter & Battery.jpg',
+        url: '/media/projects/mariakani-residential-hybrid/Inverter and Battery.jpg',
         title: '12 kW Deye Inverter & 32 kWh Battery Bank',
         caption: 'Deye 12 kW hybrid inverter, Chint distribution switchgear, and dual modular Valley LiFePO4 battery stacks.',
       },
@@ -810,7 +877,7 @@ export const projectsData: ProjectItem[] = [
     inverterBrand: 'Jua Power',
     dcArchitecture: 'Residential rooftop DC/AC conduit pathways with equipment backplates and labeling',
     batteryStorage: '16 kWh LiFePO4 (1 × 16 kWh Battery Pack)',
-    status: 'Ongoing',
+    status: 'Completed',
     employerContractor: 'Voltifix New Energy SEZ Limited',
     technologies: [
       'Jua Power 6 kW Inverter',
@@ -936,53 +1003,6 @@ export const projectsData: ProjectItem[] = [
     ],
   },
   {
-    id: 'rainbow-resort-hybrid',
-    title: 'Rainbow Resort Commercial Hybrid Solar PV & High-Capacity BESS',
-    client: 'Rainbow Resort',
-    category: 'C&I Solar & BESS',
-    location: 'Kiambu County, Kenya',
-    period: 'June 2026',
-    pvArray: '145.60 kWp DC (320 × 455 W Mono PERC Modules)',
-    inverterCapacity: '150 kW AC (3 × 50 kW Jua Power Parallel Inverters)',
-    inverterBrand: 'Jua Power',
-    batteryStorage: '336 kWh LiFePO4 (3 × 112 kWh Industrial Cabinets)',
-    dcArchitecture: 'Elevated structural steel canopies with centralized combiner boxes & automated battery combiner',
-    status: 'Completed',
-    employerContractor: 'Voltifix New Energy SEZ Limited',
-    technologies: [
-      'Jua Power Hybrid Inverters',
-      '336 kWh LiFePO4 Cabinets',
-      'Master-Slave BMS Orchestration',
-      'Dual Type I+II SPDs',
-      'Automatic Transfer Switchgear',
-      'DC Shunt-Trip Disconnects',
-    ],
-    summary:
-      'Engineered and deployed a high-capacity 145.60 kWp commercial hybrid solar PV and 336 kWh LiFePO4 battery storage system for Rainbow Resort, eliminating diesel generator reliance, maximizing self-consumption, and providing uninterrupted power during utility grid outages.',
-    narrative: {
-      challenge:
-        'Volatile grid outages and crippling monthly diesel fuel costs threatened resort operations, while noisy generator runtime and voltage sags disrupted guest comfort.',
-      solution:
-        'Engineered a 145.6 kWp canopy solar array coupled to three 50 kW Jua Power parallel hybrid inverters and 336 kWh industrial LiFePO4 battery storage with automated transfer switchgear.',
-      impact:
-        'Displaced daytime diesel generator runtime completely, suppressed night-time fuel burn by 80%, and guaranteed seamless zero-interruption power across the resort.',
-    },
-    responsibilities: [
-      'Supported structural alignment, ground-mount racking erection, and module clamping for 320 modules.',
-      'Terminated high-amperage DC string inputs into centralized combiner boxes and verified open-circuit voltage polarity.',
-      'Coordinated positioning, paralleling, and communication cable linking between the three 50 kW Jua Power inverters and the battery cabinet BMS.',
-      'Conducted system insulation resistance testing, equipotential bonding checks, and commissioning synchronization.',
-    ],
-    keyHighlights: [
-      '336 kWh LiFePO4 battery storage across three 112 kWh industrial outdoor cabinets with automated combiner',
-      'Suppressed diesel generator runtime during frequent utility load interruptions',
-      'Synchronized 150 kW AC continuous capacity with dual Type I+II SPD electrical protection',
-    ],
-    imagePlaceholder: '/images/projects/rainbow-resort.jpg',
-    coverImage: '/media/projects/rainbow-resort-hybrid/cover.jpg',
-    media: [],
-  },
-  {
     id: 'tsuku-tsuku-hybrid',
     title: 'Tsuku Tsuku Hospitality Solar & Storage System',
     client: 'Tsuku Tsuku',
@@ -1026,56 +1046,21 @@ export const projectsData: ProjectItem[] = [
       'Maintains strict phase symmetry across commercial refrigeration and processing equipment',
     ],
     imagePlaceholder: '/images/projects/tsuku-tsuku.jpg',
-    coverImage: '/media/projects/tsuku-tsuku-hybrid/cover.jpg',
-    media: [],
-  },
-  {
-    id: 'industry-4-energy-iot',
-    title: 'Industry 4.0 Real-Time Energy Telemetry & Cloud Analytics',
-    client: 'Digital Qatalyst Projects',
-    category: 'IoT & Automation',
-    location: 'Nairobi & Dubai',
-    period: 'October 2024 – May 2026',
-    pvArray: 'Sub-Station Meter Network & Telemetry Ingestion',
-    inverterCapacity: 'Multi-Point Power Monitoring (Smart Meters)',
-    inverterBrand: 'N/A (Smart Meters)',
-    dcArchitecture: 'RS485 Modbus RTU bus daisy-chained across commercial distribution switchboards',
-    batteryStorage: 'Real-Time Cloud Dashboards & Analytics',
-    status: 'Completed',
-    employerContractor: 'Digital Qatalyst',
-    technologies: [
-      'RS485 Modbus RTU',
-      'MQTT Broker',
-      'Python Pipelines',
-      'Docker Microservices',
-      'Raspberry Pi Gateways',
-      'Time-Series Dashboards',
-      'Harmonics Analysis',
+    coverImage: '/media/projects/tsuku-tsuku-hybrid/Panels View.jpeg',
+    media: [
+      {
+        type: 'image',
+        url: '/media/projects/tsuku-tsuku-hybrid/Panels View.jpeg',
+        title: '30.03 kWp Commercial Rooftop Solar Array',
+        caption: '66 × 455 W high-yield monocrystalline modules installed across the commercial facility roof at Tsuku Tsuku.',
+      },
+      {
+        type: 'image',
+        url: '/media/projects/tsuku-tsuku-hybrid/Cabinet Mounted Inverter and Batteries.jpeg',
+        title: 'Hybrid Inverters & High-Capacity Battery Bank',
+        caption: 'Three 12 kW Jua Power hybrid inverters operating in 3-phase parallel with a 96 kWh LiFePO4 battery energy storage system.',
+      },
     ],
-    summary:
-      'Engineered an edge IoT energy telemetry system connecting commercial switchboard power meters via Raspberry Pi Linux gateways to MQTT and Dockerized Python analytics pipelines, achieving an 18% reduction in unmetered energy waste.',
-    narrative: {
-      challenge:
-        'Commercial facilities operated blind to real-time power factor penalties, phase unbalance, and unmetered energy waste, leading to unexpected switchgear trips and high utility demand charges.',
-      solution:
-        'Deployed multi-channel RS485 Modbus RTU power meters linked to Raspberry Pi edge gateways running Dockerized Python microservices that stream electrical telemetry over MQTT to cloud dashboards.',
-      impact:
-        'Provided second-by-second electrical visibility, triggered automated predictive alerts for phase unbalance and harmonics, and directly enabled a verified 18% reduction in unmetered energy waste.',
-    },
-    responsibilities: [
-      'Deployed edge IoT gateways connected to multi-channel energy meters inside commercial distribution switchboards.',
-      'Programmed Python services to ingest voltage, phase current, power factor, and harmonics.',
-      'Configured lightweight MQTT pub/sub streams feeding real-time energy analytics dashboards.',
-      'Derived predictive maintenance metrics that supported an 18% reduction in unmetered energy waste.',
-    ],
-    keyHighlights: [
-      'Demonstrated actionable 18% energy waste reduction on monitored commercial panels',
-      'Sub-second telemetry processing over lightweight MQTT brokers and Dockerized microservices',
-      'Predictive maintenance alerts triggered by power-factor degradation and phase-unbalance thresholds',
-    ],
-    imagePlaceholder: '/images/projects/iot-energy.jpg',
-    coverImage: '/media/projects/industry-4-energy-iot/cover.jpg',
-    media: [],
   },
   {
     id: 'esp32-ev-chargepoint-reporter',
@@ -1157,5 +1142,98 @@ export const projectsData: ProjectItem[] = [
         caption: 'Remote supervisor cloud command RESET_FAULT clearing alert state, verifying safety interlocks, and restoring controller to normal standby operation.',
       },
     ],
+  },
+  {
+    id: 'rainbow-resort-hybrid',
+    title: 'Rainbow Resort Commercial Hybrid Solar PV & High-Capacity BESS',
+    client: 'Rainbow Resort',
+    category: 'C&I Solar & BESS',
+    location: 'Kiambu County, Kenya',
+    period: 'June 2026',
+    pvArray: '145.60 kWp DC (320 × 455 W Mono PERC Modules)',
+    inverterCapacity: '150 kW AC (3 × 50 kW Jua Power Parallel Inverters)',
+    inverterBrand: 'Jua Power',
+    batteryStorage: '336 kWh LiFePO4 (3 × 112 kWh Industrial Cabinets)',
+    dcArchitecture: 'Elevated structural steel canopies with centralized combiner boxes & automated battery combiner',
+    status: 'Completed',
+    employerContractor: 'Voltifix New Energy SEZ Limited',
+    technologies: [
+      'Jua Power Hybrid Inverters',
+      '336 kWh LiFePO4 Cabinets',
+      'Master-Slave BMS Orchestration',
+      'Dual Type I+II SPDs',
+      'Automatic Transfer Switchgear',
+      'DC Shunt-Trip Disconnects',
+    ],
+    summary:
+      'Engineered and deployed a high-capacity 145.60 kWp commercial hybrid solar PV and 336 kWh LiFePO4 battery storage system for Rainbow Resort, eliminating diesel generator reliance, maximizing self-consumption, and providing uninterrupted power during utility grid outages.',
+    narrative: {
+      challenge:
+        'Volatile grid outages and crippling monthly diesel fuel costs threatened resort operations, while noisy generator runtime and voltage sags disrupted guest comfort.',
+      solution:
+        'Engineered a 145.6 kWp canopy solar array coupled to three 50 kW Jua Power parallel hybrid inverters and 336 kWh industrial LiFePO4 battery storage with automated transfer switchgear.',
+      impact:
+        'Displaced daytime diesel generator runtime completely, suppressed night-time fuel burn by 80%, and guaranteed seamless zero-interruption power across the resort.',
+    },
+    responsibilities: [
+      'Supported structural alignment, ground-mount racking erection, and module clamping for 320 modules.',
+      'Terminated high-amperage DC string inputs into centralized combiner boxes and verified open-circuit voltage polarity.',
+      'Coordinated positioning, paralleling, and communication cable linking between the three 50 kW Jua Power inverters and the battery cabinet BMS.',
+      'Conducted system insulation resistance testing, equipotential bonding checks, and commissioning synchronization.',
+    ],
+    keyHighlights: [
+      '336 kWh LiFePO4 battery storage across three 112 kWh industrial outdoor cabinets with automated combiner',
+      'Suppressed diesel generator runtime during frequent utility load interruptions',
+      'Synchronized 150 kW AC continuous capacity with dual Type I+II SPD electrical protection',
+    ],
+    imagePlaceholder: '/images/projects/rainbow-resort.jpg',
+    media: [],
+  },
+  {
+    id: 'industry-4-energy-iot',
+    title: 'Industry 4.0 Real-Time Energy Telemetry & Cloud Analytics',
+    client: 'Digital Qatalyst Projects',
+    category: 'IoT & Automation',
+    location: 'Nairobi & Dubai',
+    period: 'October 2024 – May 2026',
+    pvArray: 'Sub-Station Meter Network & Telemetry Ingestion',
+    inverterCapacity: 'Multi-Point Power Monitoring (Smart Meters)',
+    inverterBrand: 'N/A (Smart Meters)',
+    dcArchitecture: 'RS485 Modbus RTU bus daisy-chained across commercial distribution switchboards',
+    batteryStorage: 'Real-Time Cloud Dashboards & Analytics',
+    status: 'Completed',
+    employerContractor: 'Digital Qatalyst',
+    technologies: [
+      'RS485 Modbus RTU',
+      'MQTT Broker',
+      'Python Pipelines',
+      'Docker Microservices',
+      'Raspberry Pi Gateways',
+      'Time-Series Dashboards',
+      'Harmonics Analysis',
+    ],
+    summary:
+      'Engineered an edge IoT energy telemetry system connecting commercial switchboard power meters via Raspberry Pi Linux gateways to MQTT and Dockerized Python analytics pipelines, achieving an 18% reduction in unmetered energy waste.',
+    narrative: {
+      challenge:
+        'Commercial facilities operated blind to real-time power factor penalties, phase unbalance, and unmetered energy waste, leading to unexpected switchgear trips and high utility demand charges.',
+      solution:
+        'Deployed multi-channel RS485 Modbus RTU power meters linked to Raspberry Pi edge gateways running Dockerized Python microservices that stream electrical telemetry over MQTT to cloud dashboards.',
+      impact:
+        'Provided second-by-second electrical visibility, triggered automated predictive alerts for phase unbalance and harmonics, and directly enabled a verified 18% reduction in unmetered energy waste.',
+    },
+    responsibilities: [
+      'Deployed edge IoT gateways connected to multi-channel energy meters inside commercial distribution switchboards.',
+      'Programmed Python services to ingest voltage, phase current, power factor, and harmonics.',
+      'Configured lightweight MQTT pub/sub streams feeding real-time energy analytics dashboards.',
+      'Derived predictive maintenance metrics that supported an 18% reduction in unmetered energy waste.',
+    ],
+    keyHighlights: [
+      'Demonstrated actionable 18% energy waste reduction on monitored commercial panels',
+      'Sub-second telemetry processing over lightweight MQTT brokers and Dockerized microservices',
+      'Predictive maintenance alerts triggered by power-factor degradation and phase-unbalance thresholds',
+    ],
+    imagePlaceholder: '/images/projects/iot-energy.jpg',
+    media: [],
   },
 ];
