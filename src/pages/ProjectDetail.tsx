@@ -383,7 +383,7 @@ const ProjectDetail: React.FC = () => {
                           {s.label}
                         </span>
                       </div>
-                      <span className="text-xs sm:text-sm text-neutral-900 dark:text-white font-semibold leading-snug font-mono break-all sm:break-normal">{s.val}</span>
+                      <span className="text-xs sm:text-sm text-neutral-900 dark:text-white font-semibold leading-snug font-mono break-words sm:break-normal">{s.val}</span>
                     </div>
                   );
                 })}

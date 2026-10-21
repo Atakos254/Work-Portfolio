@@ -22,7 +22,8 @@ public/media/projects/
 ├── prof-jacob-bifacial-carport/
 ├── mariakani-residential-hybrid/
 ├── mombasa-3phase-residential/
-├── catherine-garden-city-residence/
+├── carol-daykio-residence/
+├── mrs-catherine-garden-city/
 ├── bm-security-operations/
 ├── oaklands-5-villas-residence/
 ├── industry-4-energy-iot/

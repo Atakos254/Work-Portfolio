@@ -89,20 +89,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         className="relative aspect-video w-full bg-neutral-950 overflow-hidden cursor-pointer group/media select-none shrink-0"
       >
         {/* Cover Photo */}
-        <img
-          src={project.coverImage || project.imagePlaceholder}
-          alt={project.title}
-          style={project.coverImagePosition ? { objectPosition: project.coverImagePosition } : undefined}
-          className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
-          onError={e => {
-            e.currentTarget.style.display = 'none';
-            const fb = e.currentTarget.parentElement?.querySelector('.card-fallback');
-            if (fb) fb.classList.remove('hidden');
-          }}
-        />
+        {project.coverImage ? (
+          <img
+            src={project.coverImage}
+            alt={project.title}
+            style={project.coverImagePosition ? { objectPosition: project.coverImagePosition } : undefined}
+            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
+            onError={e => {
+              e.currentTarget.style.display = 'none';
+              const fb = e.currentTarget.parentElement?.querySelector('.card-fallback');
+              if (fb) fb.classList.remove('hidden');
+            }}
+          />
+        ) : null}
 
         {/* Blueprint / Schematic Fallback Graphic */}
-        <div className="card-fallback hidden absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-neutral-900 via-neutral-850 to-neutral-950 text-white">
+        <div className={`card-fallback ${project.coverImage ? 'hidden' : ''} absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-neutral-900 via-neutral-850 to-neutral-950 text-white`}>
           <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 mb-2 group-hover/media:scale-110 transition-transform">
             {isIot ? <Cpu className="w-5 h-5 text-cyan-400" /> : <Sun className="w-5 h-5 text-amber-400" />}
           </div>
@@ -111,25 +113,39 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         </div>
 
         {/* Top Category Badge Overlay */}
-        <div className="absolute top-3 left-3 pointer-events-none">
-          <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide backdrop-blur-md bg-neutral-950/75 text-white border border-white/15 shadow-sm">
+        <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 pointer-events-none">
+          <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wide backdrop-blur-md bg-neutral-950/75 text-white border border-white/15 shadow-sm">
             {project.category}
           </span>
         </div>
+
+        {/* Bottom Right Media Counter Overlay */}
+        {project.media && project.media.length > 0 && (
+          <div className="absolute bottom-2 sm:bottom-2.5 right-2 sm:right-2.5 pointer-events-none">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wide backdrop-blur-md bg-neutral-950/80 text-white border border-white/15 shadow-sm">
+              {project.media.some(m => m.type === 'video') ? (
+                <Film className="w-3 h-3 text-emerald-400" />
+              ) : (
+                <Camera className="w-3 h-3 text-blue-400" />
+              )}
+              <span>{project.media.length}</span>
+            </span>
+          </div>
+        )}
       </div>
 
       {/* ── Balanced Content Block ──────────────────────────────── */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+      <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between">
         {/* Top Content (Metadata, Title, Narrative) */}
         <div>
           {/* Header Row: Client & Status */}
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 truncate">
+          <div className="flex items-center justify-between gap-2 mb-1.5 sm:mb-2">
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 truncate">
               {project.client}
             </span>
             <span
               className={clsx(
-                'inline-flex items-center gap-1.5 text-[11px] px-2.5 py-0.5 rounded-full font-medium shrink-0',
+                'inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] px-2 sm:px-2.5 py-0.5 rounded-full font-medium shrink-0',
                 project.status === 'Completed'
                   ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
                   : project.status === 'Continuous'
@@ -152,25 +168,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           </div>
 
           {/* Title - locked to 2 lines height with vertical centering */}
-          <h3 className="text-base font-bold text-neutral-950 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors mb-2 leading-snug line-clamp-2 min-h-[2.5rem] sm:min-h-[2.75rem] flex items-center">
+          <h3 className="text-sm sm:text-base font-bold text-neutral-950 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors mb-2 leading-snug line-clamp-2 min-h-[2.4rem] sm:min-h-[2.75rem] flex items-center">
             {project.title}
           </h3>
 
-          {/* Location & Period - clean single line */}
-          <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-3 h-4 truncate">
-            <span className="inline-flex items-center gap-1 truncate">
+          {/* Location & Period - clean responsive wrapping */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mb-2.5 min-h-[1.125rem]">
+            <span className="inline-flex items-center gap-1 min-w-0 max-w-full truncate">
               <MapPin size={12} className="text-neutral-400 dark:text-neutral-500 shrink-0" />
               <span className="truncate">{project.location}</span>
             </span>
-            <span className="text-neutral-300 dark:text-neutral-600">•</span>
-            <span className="inline-flex items-center gap-1 shrink-0">
+            <span className="hidden sm:inline text-neutral-300 dark:text-neutral-600">•</span>
+            <span className="inline-flex items-center gap-1 shrink-0 text-neutral-400 dark:text-neutral-500">
               <Calendar size={12} className="text-neutral-400 dark:text-neutral-500 shrink-0" />
               <span>{project.period}</span>
             </span>
           </div>
 
           {/* Summary Narrative - locked to 2 clean lines */}
-          <p className="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2 mb-3.5 leading-relaxed h-[2.25rem] overflow-hidden">
+          <p className="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2 mb-3 leading-relaxed h-[2.25rem] overflow-hidden">
             {project.summary}
           </p>
         </div>
@@ -178,17 +194,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
         {/* Bottom Content (Specs Panel, Tech Tags, Action CTAs) */}
         <div className="mt-auto">
           {/* Structured Key Technical Specs Box */}
-          <div className="bg-neutral-50/90 dark:bg-neutral-900/80 rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-2.5 mb-3.5 divide-y divide-neutral-200/60 dark:divide-neutral-800">
+          <div className="bg-neutral-50/90 dark:bg-neutral-900/80 rounded-xl border border-neutral-200/80 dark:border-neutral-800 p-2 sm:p-2.5 mb-3 divide-y divide-neutral-200/60 dark:divide-neutral-800">
             {specs.map((spec, i) => {
               const Icon = spec.icon;
               return (
-                <div key={i} className="flex items-center justify-between gap-2 py-1.5 first:pt-0 last:pb-0 text-xs">
+                <div key={i} className="flex items-center justify-between gap-2 py-1 first:pt-0 last:pb-0 text-xs">
                   <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 font-medium shrink-0">
                     <Icon className="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-400 shrink-0" />
                     <span className="text-[11px]">{spec.label}</span>
                   </div>
                   <span
-                    className="text-neutral-900 dark:text-white font-semibold text-xs truncate text-right font-mono"
+                    className="text-neutral-900 dark:text-white font-semibold text-xs truncate text-right font-mono max-w-[65%]"
                     title={spec.fullText}
                   >
                     {spec.brief}
@@ -199,11 +215,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
           </div>
 
           {/* Technology Tags - clean uniform row */}
-          <div className="flex items-center gap-1.5 mb-3.5 h-6 overflow-hidden">
+          <div className="flex items-center gap-1.5 mb-3 h-6 overflow-hidden">
             {project.technologies.slice(0, 3).map((tech, i) => (
               <span
                 key={i}
-                className="text-[11px] px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-medium truncate max-w-[130px]"
+                className="text-[10px] sm:text-[11px] px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-medium truncate max-w-[120px] sm:max-w-[130px]"
               >
                 {tech}
               </span>
@@ -215,25 +231,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index = 0, on
             )}
           </div>
 
-          {/* Action CTAs: Balanced Twin Buttons */}
+          {/* Action CTAs: Balanced Twin Buttons with 40px touch targets */}
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={handleMediaClick}
               aria-label={`View photos and video for ${project.title}`}
-              className="btn-secondary flex-1 text-xs h-9 py-0 px-2 sm:px-3.5 group/media-btn"
+              className="btn-secondary flex-1 text-xs min-h-[40px] sm:min-h-[36px] h-10 sm:h-9 py-0 px-2 sm:px-3.5 group/media-btn"
             >
               {project.media?.some(m => m.type === 'video') ? (
                 <Film className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
               ) : (
                 <Camera className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/media-btn:text-white dark:group-hover/media-btn:text-[#090d16] group-active/media-btn:text-white dark:group-active/media-btn:text-[#090d16] transition-colors" />
               )}
-              <span>Media</span>
+              <span>Media{project.media && project.media.length > 0 ? ` (${project.media.length})` : ''}</span>
             </button>
             <Link
               to={`/projects/${project.id}`}
               aria-label={`View engineering specs for ${project.title}`}
-              className="btn-primary flex-1 text-xs h-9 py-0 px-2 sm:px-3.5 group/specs-btn"
+              className="btn-primary flex-1 text-xs min-h-[40px] sm:min-h-[36px] h-10 sm:h-9 py-0 px-2 sm:px-3.5 group/specs-btn"
             >
               <FileText className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400 group-hover/specs-btn:text-white dark:group-hover/specs-btn:text-[#090d16] group-active/specs-btn:text-white dark:group-active/specs-btn:text-[#090d16] transition-colors" />
               <span>View Specs</span>

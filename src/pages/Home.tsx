@@ -187,7 +187,7 @@ const Home: React.FC = () => {
               id="home-view-all-projects"
               className="inline-flex items-center gap-2 text-sm font-bold text-neutral-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group shrink-0 self-start sm:self-auto"
             >
-              <span>View All 16 Projects</span>
+              <span>View All {projectsData.length} Projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
