@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { workExperience, EmploymentType } from '../data/experience';
-import { MapPin, Calendar, CheckCircle2, Download, Award } from 'lucide-react';
+import { MapPin, Calendar, CheckCircle2, Download, Award, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { downloadExperienceReport } from '../utils/generateExperienceReport';
 
 const typeBadge: Record<EmploymentType, string> = {
   'Full-Time':  'badge-emerald',
@@ -12,6 +13,20 @@ const typeBadge: Record<EmploymentType, string> = {
 };
 
 const Experience: React.FC = () => {
+  const [generating, setGenerating] = useState(false);
+
+  const handleDownloadReport = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setGenerating(true);
+    try {
+      downloadExperienceReport();
+    } catch (err) {
+      console.error('Dynamic PDF generation error:', err);
+      window.location.href = '/docs/Emmanuel_Atakos_Project_Experience_Report.pdf';
+    } finally {
+      setGenerating(false);
+    }
+  };
   return (
     <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
@@ -143,12 +158,22 @@ const Experience: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
             <a
               href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
-              download
-              className="btn-primary w-full sm:w-auto"
-              aria-label="Download experience report"
+              download="Emmanuel_Atakos_Project_Experience_Report.pdf"
+              onClick={handleDownloadReport}
+              className="btn-primary w-full sm:w-auto cursor-pointer"
+              aria-label="Download dynamic experience report"
             >
-              <Download size={16} />
-              Download Experience Report
+              {generating ? (
+                <>
+                  <Loader2 size={16} className="animate-spin text-white" />
+                  <span>Generating Report…</span>
+                </>
+              ) : (
+                <>
+                  <Download size={16} />
+                  <span>Download Experience Report</span>
+                </>
+              )}
             </a>
             <Link to="/about" className="btn-secondary w-full sm:w-auto">
               <Award size={16} />

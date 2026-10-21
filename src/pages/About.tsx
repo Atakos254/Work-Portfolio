@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { profileData } from '../data/profile';
 import { skillCategories } from '../data/skills';
 import {
-  Award, GraduationCap, ShieldCheck, Sun, Zap, Cpu, Download,
+  Award, GraduationCap, ShieldCheck, Sun, Zap, Cpu, Download, Loader2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
+import { downloadExperienceReport } from '../utils/generateExperienceReport';
 
 const iconMap: Record<string, React.ElementType> = {
   Sun, Zap, Cpu, ShieldCheck,
@@ -57,6 +58,20 @@ const credentials = [
 ];
 
 const About: React.FC = () => {
+  const [generatingReport, setGeneratingReport] = useState(false);
+
+  const handleDownloadReport = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setGeneratingReport(true);
+    try {
+      downloadExperienceReport();
+    } catch (err) {
+      console.error('Dynamic PDF generation error:', err);
+      window.location.href = '/docs/Emmanuel_Atakos_Project_Experience_Report.pdf';
+    } finally {
+      setGeneratingReport(false);
+    }
+  };
   return (
     <div className="min-h-screen py-8 sm:py-16 lg:py-20 bg-white dark:bg-[#090d16] transition-colors">
       <div className="section-wrapper">
@@ -204,12 +219,22 @@ const About: React.FC = () => {
               </a>
               <a
                 href="/docs/Emmanuel_Atakos_Project_Experience_Report.pdf"
-                download
+                download="Emmanuel_Atakos_Project_Experience_Report.pdf"
+                onClick={handleDownloadReport}
                 aria-label="Download Solar PV Project Experience Report PDF"
-                className="btn-secondary w-full sm:w-auto"
+                className="btn-secondary w-full sm:w-auto cursor-pointer"
               >
-                <Download size={15} />
-                <span>Project Experience Report</span>
+                {generatingReport ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin text-neutral-500 dark:text-neutral-300" />
+                    <span>Generating…</span>
+                  </>
+                ) : (
+                  <>
+                    <Download size={15} />
+                    <span>Project Experience Report</span>
+                  </>
+                )}
               </a>
 
               {profileData.contact.linkedin && (
