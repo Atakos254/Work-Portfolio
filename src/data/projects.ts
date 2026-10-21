@@ -877,7 +877,7 @@ export const projectsData: ProjectItem[] = [
     inverterBrand: 'Jua Power',
     dcArchitecture: 'Residential rooftop DC/AC conduit pathways with equipment backplates and labeling',
     batteryStorage: '16 kWh LiFePO4 (1 × 16 kWh Battery Pack)',
-    status: 'Ongoing',
+    status: 'Completed',
     employerContractor: 'Voltifix New Energy SEZ Limited',
     technologies: [
       'Jua Power 6 kW Inverter',
