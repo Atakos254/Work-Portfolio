@@ -171,7 +171,7 @@ const Experience: React.FC = () => {
               ) : (
                 <>
                   <Download size={16} />
-                  <span>Download Experience Report</span>
+                  <span>Project Experience Report</span>
                 </>
               )}
             </a>

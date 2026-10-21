@@ -2,14 +2,16 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { projectsData, ProjectItem } from '../data/projects';
 import { profileData, ProfileData } from '../data/profile';
+import { workExperience, WorkExperience } from '../data/experience';
 
 /**
  * Dynamically generates a publication-quality Project Experience Report PDF
- * directly from projectsData and profileData.
+ * directly from projectsData, profileData, and workExperience.
  */
 export function generateExperienceReport(
   projects: ProjectItem[] = projectsData,
-  profile: ProfileData = profileData
+  profile: ProfileData = profileData,
+  experiences: WorkExperience[] = workExperience
 ): jsPDF {
   const doc = new jsPDF({
     orientation: 'portrait',
@@ -28,6 +30,13 @@ export function generateExperienceReport(
   const lightBg = [248, 250, 252];   // #f8fafc
   const emerald = [5, 150, 105];     // #059669
   const borderGrey = [226, 232, 240];// #e2e8f0
+
+  doc.setProperties({
+    title: 'Emmanuel Atakos Project Experience Report',
+    subject: 'Professional Experience & Technical Project Report',
+    author: profile.name,
+    creator: 'Emmanuel Atakos Portfolio',
+  });
 
   let y = margin;
 
@@ -80,14 +89,14 @@ export function generateExperienceReport(
   doc.roundedRect(margin, y, contentWidth, 14, 2, 2, 'F');
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(11);
+  doc.setFontSize(11.5);
   doc.setTextColor(255, 255, 255);
-  doc.text('COMPREHENSIVE SOLAR PV, BESS & ENERGY SYSTEMS PROJECT REPORT', margin + 4, y + 6);
+  doc.text('EMMANUEL ATAKOS PROJECT EXPERIENCE REPORT', margin + 4, y + 6);
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.5);
   doc.setTextColor(203, 213, 225);
-  const reportSubtitle = `Master Engineering Dossier — ${projects.length} Field Installations & Industrial Telemetry Deployments`;
+  const reportSubtitle = `Comprehensive Engineering Dossier — Professional Career Record, ${projects.length} Field Installations & Telemetry Deployments`;
   doc.text(reportSubtitle, margin + 4, y + 10.5);
 
   const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -195,7 +204,175 @@ export function generateExperienceReport(
   });
 
   /* =====================================================================
-     PAGES 2+: DETAILED TECHNICAL PROJECT DOSSIER
+     PAGE 2: PROFESSIONAL WORK EXPERIENCE & CAREER RECORD
+     ===================================================================== */
+  doc.addPage();
+  y = margin + 4;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+  doc.text('2. PROFESSIONAL WORK EXPERIENCE & CAREER RECORD', margin, y);
+
+  y += 2;
+  doc.setDrawColor(emerald[0], emerald[1], emerald[2]);
+  doc.setLineWidth(0.8);
+  doc.line(margin, y, margin + 45, y);
+
+  y += 5.5;
+
+  experiences.forEach(exp => {
+    const ribbonH = 7.0;
+    doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
+    doc.setDrawColor(borderGrey[0], borderGrey[1], borderGrey[2]);
+    doc.roundedRect(margin, y, contentWidth, ribbonH, 1.2, 1.2, 'FD');
+
+    // Role & Company on Left
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.5);
+    doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+    const roleText = `${exp.role}  —  ${exp.company}`;
+    doc.text(roleText, margin + 3, y + 4.8);
+
+    // Period & Type Badge on Right
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6.8);
+    doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+    const badgeText = `${exp.period.toUpperCase()}   |   ${exp.type.toUpperCase()}`;
+    const badgeW = doc.getTextWidth(badgeText);
+    doc.text(badgeText, pageWidth - margin - badgeW - 3, y + 4.8);
+
+    y += ribbonH + 3.8;
+
+    // Location
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(6.8);
+    doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+    doc.text(`Location: ${exp.location}`, margin + 3, y);
+    y += 3.2;
+
+    // Bullets
+    exp.bullets.forEach(bullet => {
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+      doc.text('•', margin + 3, y);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+      const bLines = doc.splitTextToSize(bullet, contentWidth - 8);
+      doc.text(bLines, margin + 6, y);
+      y += bLines.length * 2.8 + 0.8;
+    });
+
+    y += 2.5;
+  });
+
+  // Education & Accreditations Cards
+  y += 3;
+  const cardW = (contentWidth - 4) / 2;
+  const cardH = 34;
+
+  // Left Card: Education & Certifications
+  doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
+  doc.setDrawColor(borderGrey[0], borderGrey[1], borderGrey[2]);
+  doc.roundedRect(margin, y, cardW, cardH, 1.5, 1.5, 'FD');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+  doc.text('EDUCATION & PROFESSIONAL QUALIFICATIONS', margin + 3, y + 5);
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.0);
+  doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+  doc.text(profile.education.degree, margin + 3, y + 10.5);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(6.5);
+  doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+  doc.text(profile.education.institution, margin + 3, y + 14.5);
+
+  profile.education.certifications.forEach((cert, cIdx) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+    doc.text('•', margin + 3, y + 20 + cIdx * 4.5);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+    doc.text(cert, margin + 6, y + 20 + cIdx * 4.5);
+  });
+
+  // Right Card: Statutory Licenses & Accreditations
+  const rx = margin + cardW + 4;
+  doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
+  doc.roundedRect(rx, y, cardW, cardH, 1.5, 1.5, 'FD');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+  doc.text('STATUTORY LICENSES & ACCREDITATIONS', rx + 3, y + 5);
+
+  const regs = [
+    profile.registrations.ebkRegistration,
+    profile.registrations.epraLicense || '',
+    profile.registrations.iekMembership,
+  ].filter(Boolean);
+
+  regs.forEach((r, rIdx) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+    doc.text('•', rx + 3, y + 10.5 + rIdx * 7.0);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(6.5);
+    doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+    const lines = doc.splitTextToSize(r, cardW - 8);
+    doc.text(lines, rx + 6, y + 10.5 + rIdx * 7.0);
+  });
+
+  y += cardH + 4;
+
+  // Competencies Banner
+  const compH = 26;
+  doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
+  doc.setDrawColor(borderGrey[0], borderGrey[1], borderGrey[2]);
+  doc.roundedRect(margin, y, contentWidth, compH, 1.5, 1.5, 'FD');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+  doc.text('CORE TECHNICAL COMPETENCIES & SPECIALIZATIONS', margin + 3, y + 4.8);
+
+  const compCols = [
+    {
+      title: 'Solar PV & Storage (BESS)',
+      skills: '1,500 VDC Utility Systems • LiFePO4 BMS • Multi-Inverter Paralleling • IV-Curve Testing • Earthing & LOTO',
+    },
+    {
+      title: 'EV Infrastructure & Automation',
+      skills: 'AC/DC Fast EV Chargers • Modbus RTU/RS485 • MQTT Telemetry • Industrial Edge Gateways • Docker',
+    },
+    {
+      title: 'Engineering Tools & Standards',
+      skills: 'AutoCAD Electrical SLDs • Python Analytics • SCADA Dashboards • IEC 62446 / 60364 • PMI Methodologies',
+    },
+  ];
+
+  compCols.forEach((col, cIdx) => {
+    const colY = y + 9.5 + cIdx * 5.2;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6.5);
+    doc.setTextColor(emerald[0], emerald[1], emerald[2]);
+    doc.text(`${col.title}:`, margin + 3, colY);
+
+    const titleW = doc.getTextWidth(`${col.title}: `);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(slateText[0], slateText[1], slateText[2]);
+    doc.text(col.skills, margin + 3 + titleW, colY);
+  });
+
+  /* =====================================================================
+     PAGES 3+: DETAILED TECHNICAL PROJECT DOSSIER
      ===================================================================== */
 
   doc.addPage();
@@ -204,7 +381,7 @@ export function generateExperienceReport(
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(12);
   doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
-  doc.text('2. DETAILED TECHNICAL SPECIFICATIONS & INSTALLATION RECORDS', margin, y);
+  doc.text('3. DETAILED TECHNICAL SPECIFICATIONS & INSTALLATION RECORDS', margin, y);
 
   y += 2;
   doc.setDrawColor(emerald[0], emerald[1], emerald[2]);
@@ -221,31 +398,40 @@ export function generateExperienceReport(
     }
 
     // Project Header Ribbon
+    const ribbonHeight = 7.5;
     doc.setFillColor(lightBg[0], lightBg[1], lightBg[2]);
     doc.setDrawColor(borderGrey[0], borderGrey[1], borderGrey[2]);
-    doc.roundedRect(margin, y, contentWidth, 7, 1.5, 1.5, 'FD');
+    doc.roundedRect(margin, y, contentWidth, ribbonHeight, 1.5, 1.5, 'FD');
 
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
-    const headerTitle = `${String(idx + 1).padStart(2, '0')}. ${project.title}`;
-    doc.text(headerTitle, margin + 2.5, y + 4.8);
-
+    // Category / Status Badge on right
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(6.8);
     doc.setTextColor(emerald[0], emerald[1], emerald[2]);
-    doc.text(`${project.category.toUpperCase()} | ${project.status.toUpperCase()}`, pageWidth - margin - 50, y + 4.8);
+    const badgeText = `${project.category.toUpperCase()}  |  ${project.status.toUpperCase()}`;
+    const badgeWidth = doc.getTextWidth(badgeText);
+    doc.text(badgeText, pageWidth - margin - badgeWidth - 3, y + 5.1);
 
-    y += 9;
+    // Title on left
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.2);
+    doc.setTextColor(darkNavy[0], darkNavy[1], darkNavy[2]);
+    const headerTitle = `${String(idx + 1).padStart(2, '0')}. ${project.title}`;
+    const titleLines = doc.splitTextToSize(headerTitle, contentWidth - badgeWidth - 8);
+    doc.text(titleLines[0], margin + 3, y + 5.1);
 
-    // Metadata Sub-row
+    // Advance past ribbon with comfortable clearance (4.5mm below ribbon)
+    y += ribbonHeight + 4.5;
+
+    // Metadata Sub-row with safe line splitting and clearance
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7);
+    doc.setFontSize(6.8);
     doc.setTextColor(slateText[0], slateText[1], slateText[2]);
-    const metaLine = `Client: ${project.client}   |   Location: ${project.location}   |   Period: ${project.period}   |   Contractor: ${project.employerContractor}`;
-    doc.text(metaLine, margin + 2, y);
+    const metaLine = `Client: ${project.client}   •   Location: ${project.location}   •   Period: ${project.period}   •   Contractor: ${project.employerContractor}`;
+    const metaLines = doc.splitTextToSize(metaLine, contentWidth - 4);
+    doc.text(metaLines, margin + 2, y);
 
-    y += 4;
+    // Advance past metadata lines + 3mm gap before the specs box
+    y += metaLines.length * 3.2 + 2.8;
 
     // Technical Specs Grid Row
     const specColWidth = contentWidth / 4;
@@ -370,7 +556,7 @@ export function generateExperienceReport(
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(6.8);
       doc.setTextColor(slateText[0], slateText[1], slateText[2]);
-      doc.text('EMMANUEL THOMAS ATAKOS  |  SOLAR PV & ENERGY STORAGE PROJECT DOSSIER', margin, 9);
+      doc.text('EMMANUEL ATAKOS  |  PROJECT EXPERIENCE REPORT', margin, 9);
 
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(emerald[0], emerald[1], emerald[2]);
@@ -409,8 +595,9 @@ export function generateExperienceReport(
 export function downloadExperienceReport(
   projects: ProjectItem[] = projectsData,
   profile: ProfileData = profileData,
+  experiences: WorkExperience[] = workExperience,
   filename = 'Emmanuel_Atakos_Project_Experience_Report.pdf'
 ): void {
-  const doc = generateExperienceReport(projects, profile);
+  const doc = generateExperienceReport(projects, profile, experiences);
   doc.save(filename);
 }

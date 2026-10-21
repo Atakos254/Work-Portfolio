@@ -3,11 +3,12 @@ import path from 'path';
 import { generateExperienceReport } from '../src/utils/generateExperienceReport';
 import { projectsData } from '../src/data/projects';
 import { profileData } from '../src/data/profile';
+import { workExperience } from '../src/data/experience';
 
-console.log('Generating Project Experience Report PDF from projectsData...');
+console.log('Generating Project Experience Report PDF from projectsData & workExperience...');
 
 try {
-  const doc = generateExperienceReport(projectsData, profileData);
+  const doc = generateExperienceReport(projectsData, profileData, workExperience);
   const pdfArrayBuffer = doc.output('arraybuffer');
   const buffer = Buffer.from(pdfArrayBuffer);
 
